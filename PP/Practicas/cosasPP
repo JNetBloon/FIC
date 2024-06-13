@@ -1,0 +1,1046 @@
+----------------------
+--Notas prácticas:--
+NC - No Compila
+NP - No Presentado
+->P1
+nombre: 	0,01/0,01
+pi: 		0,01/0,01
+expr: 		0,04/0,04
+e: 		0,01/0,01
+->P2
+frases: 	0,04/0,04
+def: 		0,01/0,01
+def2: 		0,06/0,06
+->P3
+frases2: 	0,00/0,02
+if_then_else: 	0,02/0,02
+def2_a: 	0,01/0,01
+funciones: 	0,04/0,05
+->P4
+frases4: 	0,03/0,03
+ej42: 		0,02/0,02
+ej43: 		0,06/0,06
+power: 		0,015/0,05
+pairs: 		0,06/0,06
+pairs2: 	NC/0,06
+->P5 
+ej31: 		0,02/0,02
+primes: 	0,06/0,06
+fibto: 		0,04/0,04
+collatz: 	0,072/0,09
+->P6 
+mylist: 	NC/0,2		NOTA: Faltaba un detalle que hacía que fallara en otras máquinas pero en local no, de ahí el NC (Aún así las funciones pueden tener errores)
+terminal: 	NC/0,1		
+->P7 
+sort: 		0,24/0,3
+tail: 		0,1/0,2
+->P8 
+queens: 	0,25/0,25
+knight: 	0,00/0,3
+->P9 
+bintree: 	0,2/0,2
+bintree_opt: 	NP/0,2
+->P10 
+dijkstra: 	0,21/0,3
+->P11 
+list_loop: 	0,1/0,1
+array_loop: 	NP/0,1
+
+->Práctica competitiva #1 Fibonacci - NO CLASIFICADO
+->Práctica competitiva #2 Caminos mínimos - NO CLASIFICADO
+
+----------------------
+
+ledit ocaml #ABRIR OCAML CON PODER DE EDICION
+
+let string_of_bool = function
+	| true -> "true"
+	| false -> "false";;
+let string_of_bool = function x -> if x then "true" else "false";;
+
+
+let string_of_bool x = if x ...
+let string_of_bool x = match x with
+	| ...
+
+ocaml -noprompt -w -a <frases.ml> out
+		      <frases2.ml> out2
+
+diff out out2
+man diff (Comparar fila por fila)
+man cmp (Comparar por bytes)
+
+.................
+
+.................
+
+if <b> then <e1>
+	else <e2> --->
+
+(function true-> <e1>
+	| false -> <e2>) <b>
+	
+.................
+Para el ejer 3 de la P5
+let _ = print_endline <a>
+
+................ CLASES TEORICAS
+let rec fib n = (* n >= 0 *)
+	if n <= 1 then n
+	else fib (n - 1) + fib (n - 2);;
+	
+let rec fib2 = function (* n > 0 *)
+	1 -> (1, 0)
+	| n -> let f1, f2 = fib2 (n-1) in
+		(f1 + f2, f1);;
+		
+let crono f x =
+	let t = Sys.time () in
+	let _ = f x in
+	Sys.time () -. t ;;
+	
+List.hd;; //1º elemento de la lista
+List.tl;; //Si se le aplica a una lista, devuelve otra como la anterior sin el primer elemento
+
+..................... TEORICAS II
+
+let rec length l =
+	if l = [] then 0
+	else 1+ length (List.tl l);;
+	
+let length ll =
+	let rec aux (l, i) =
+		if l = [] then i
+		else aux (List.tl l, i + 1)
+	in aux (ll, 0);;
+	
+let rec last l = #NO SE DEBERIA HACER ASI
+	if length l = 1 then List.hd l
+	else last (List.tl l);;
+	
+let rec last l = #NO SE DEBERIA HACER ASI
+	if List.tl l = [] then List.hd l
+	else last (List.tl l);;
+	
+let hd = function (h :: _) -> h;;
+
+let hd (h::_) = h;;
+
+let rec length = function
+	[] -> 0
+	| _::t -> 1 + length t;;
+	
+let rec last = function
+	h :: [] -> h
+	| _ :: t -> last t;;
+	
+let compare_length l1 l2 =
+	compare (length l1) (length l2);;
+
+------------------AYUDA LISTAS--------------------------
+
+1. Creación de listas:
+Puedes crear listas en OCaml utilizando la notación [elemento1; elemento2; ...], donde elemento1, elemento2, etc., son los elementos que deseas almacenar en la lista. Por ejemplo:
+
+let mi_lista = [1; 2; 3; 4; 5];;
+
+O TAMBIEN	let l1 = a::b::c::d[];;
+
+2. Acceso a elementos:
+Puedes acceder a los elementos de una lista utilizando el operador :: para obtener la cabeza (primer elemento) y el operador @ para concatenar dos listas. Por ejemplo:
+
+let primer_elemento = List.hd mi_lista;;  (* Obtiene el primer elemento de la lista *)
+let resto_de_la_lista = List.tl mi_lista;;  (* Obtiene la lista sin el primer elemento *)
+
+3. Operaciones comunes en listas:
+OCaml proporciona funciones de biblioteca para realizar operaciones comunes en listas, como List.length (para obtener la longitud de una lista), List.rev (para invertir una lista), List.map (para aplicar una función a cada elemento de la lista), List.filter (para filtrar elementos que cumplan cierta condición), entre otras.
+
+Por ejemplo:
+
+let longitud = List.length mi_lista;;
+let lista_invertida = List.rev mi_lista;;
+let lista_doble = List.map (fun x -> x * 2) mi_lista;;
+let lista_pares = List.filter (fun x -> x mod 2 = 0) mi_lista;;
+
+let duplicar x = x * 2;;
+let lista_doble = List.map duplicar mi_lista;;
+
+let es_par x = x mod 2 = 0;;
+let lista_pares = List.filter es_par mi_lista;;
+
+
+4. Patrón de coincidencia en listas:
+En OCaml, es común utilizar patrones de coincidencia para trabajar con listas. Puedes descomponer una lista en su cabeza y cola (o incluso en elementos individuales) usando patrones de coincidencia. Por ejemplo:
+
+let rec suma_lista lista =
+  match lista with
+  | [] -> 0
+  | cabeza :: cola -> cabeza + suma_lista cola
+in
+let resultado = suma_lista mi_lista;;
+
+USO DE MATCH
+match expresion with
+| patron1 -> resultado1
+| patron2 -> resultado2
+...
+| patronN -> resultadoN
+
+USO DE MATCH Y ::
+match lista with
+| [] -> (* Caso base: la lista está vacía *)
+| primero :: resto -> (* Caso recursivo: primero es el primer elemento y resto es el resto de la lista *)
+
+
+5. Listas recursivas:
+Dado que OCaml es un lenguaje funcional, a menudo se utilizan funciones recursivas para trabajar con listas. Un ejemplo común es la recursión en la cola para evitar el desbordamiento de la pila. Por ejemplo:
+
+let rec suma_lista_tail lista acumulador =
+  match lista with
+  | [] -> acumulador
+  | cabeza :: cola -> suma_lista_tail cola (acumulador + cabeza)
+in
+let resultado = suma_lista_tail mi_lista 0;;
+
+-------Devolver el primer elemento
+let hd = function h :: _ -> h
+let hd (h :: _ ) = h
+
+------Longitud de la lista
+let rec length = function
+	[] -> 0
+	| _::t -> 1 + length t
+	
+............Recursiva teminal / no terminal
+La recursiva terminal no significa que la llamada se llama al final de la funcion, lo de terminal se refiere a que no tenga que hacer nada mas con el resultado, solo la llama
+La de rec length es recursiva pero no terminal, porque tiene que coger el resultado y sumarlo al final.
+
+............FUNCIONES VARIAS
+let rec append l1 l2 =
+	match l1 with
+	[] -> l2
+	| h::t ->  h :: append t l2
+	
+let rec rev_append l1 l2 = match l1 with //ES RECURSIVA TERMINAL
+	[] -> l2
+	| h::t -> rev_append t (h::l2)
+	
+let rev l = rev_append l [];; //REV DE MANERA FACIL
+
+let append' l1 l2 = rev_append (rev l1) l2;; //APPEND DE MANERA FACIL
+
+let l4 = init 10 (function i -> (64+i));; //COMO USAR INIT
+
+let hd = function //HD CON ERROR DE VUELTA
+	h::_ -> h;;
+
+...........ERRORES
+Failure "error";;
+Invalid_argument "error";;
+
+let rec lmax = function
+	[] -> raise (Failure "lmax")
+	| h::[] -> h
+	| h::t -> if h >= lmax t then h
+		else lmax t;;
+		
+let rec lmax2 = function
+	[] -> raise (Failure "lmax")
+	| h::[] -> h
+	| h::t -> let m = lmax2 t in
+		if h >= m then h
+		else m;;
+		
+let lmax' = function
+	[] -> raise (Failure "lmax")
+	| h::t -> let rec loop m = function
+		[] -> m
+		| h ::t -> loop (max m h) t
+		in loop h t;;
+List.fold_left f a [b1, b2, b3];; ---> Devuelve el resultado de f (f (f a b1) b2) b3
+	Por ejemplo, List.fold_left (+) 7 [2; 1; 3];;
+	
+...........COSAS ORDENACION
+
+----ESTO ES HECHO POR MI EN UNA PRACTICA------
+(*Auxiliar para que sea mas random la lista en rlist*)
+(*Lista al azar que no repite numeros consecutivos*)
+let rec notsamenum n prevnum =
+  let num = Random.int n in
+  if num = prevnum then
+    notsamenum n prevnum
+  else num;;
+
+let rlist n =
+  let rec aux l i prevNum =
+    let prevNum = (notsamenum n prevNum) in
+    if (i<n) then aux (prevNum :: l) (i+1) prevNum
+    else l
+  in aux [] 0 0;;
+
+let l = rlist 10;;
+
+(*Lista al azar que no repite numeros de la lista*)
+let rec existNum n = function
+  [] -> false
+  | h::t -> if h = n then true else existNum n t;;
+
+let rec rNum n l =
+  let num = Random.int n in
+  if existNum num l then rNum n l else num;; 
+
+let rlist n =
+  let rec aux l i =
+    if (i<n) then 
+      let rn = rNum n l in aux (rn :: l) (i+1)
+    else l
+  in aux [] 0;;
+
+-----------------------------------------------
+
+
+
+let crono f xx =
+	let t = Sys.time () in
+	let _ = f x in
+	Sys.time () -. t;;
+	
+let rlist in
+	let r = 4 * n in
+	List.init n (fun-> Random.init r);;
+	
+let rec split = function
+	[] -> [], []
+	| h::[] -> [h], []
+	| h1::h2::t -> let t1, t2 = split t
+			in (h1::t1 ,h2::t2);;
+			
+let rec merge = function
+	h1::t1, h2::t2 -> if h1 <= h2 then h1:: merge (t1, h2::t2)
+				else h2 :: merge  (h1::t1, t2)
+	| [], l | l, [] -> l;;
+	
+let rec msort = function
+	let l1, l2 = split l
+	in merge (msort l1, msort l2);;
+	
+Crear al final una clase llamada Partida, que tenga x turnos pasados por parametro con 3 funciones, Partida.ganaMago, .ganaGuerrero, .empate,
+y asi testear un Partida.obtenerGanador
+
+clase defender para absorber un ataque que haga la clase atacar
+
+
+let last (h::t) =
+	List.fold_left (fun _ x -> x) h t;;
+
+let rec sorted = function
+	[] | _::[] -> true
+	| h1::h2::t -> h1 <= h2 && sorted (h2::t);;
+
+let rec g_sorted ord = function
+	[] | _::[] -> true
+	| h1::h2::t -> ord h1 h2 && g_sorted (h2::t);;
+
+let rec insert x = function
+	[] -> [x]
+	| h::t -> if x <= h then x::h::t
+		else h::insert x t;;
+
+let rec isort = function
+	[] -> []
+	| h::t -> insert h t;;
+
+
+Problemas de las ocho reinas ->
+	-Para empezar a ver las soluciones, primero se empieza en la [1,1] la primera
+	-Luego vas colocando donde puedas hasta llegar a que se puede o no
+	-Repetir con [1,2] y asi hasta el final
+
+let come (i1, j1) (i2, j2) =
+	i1 = i2 || j1 = j2 || abs(i1-i2) = abs (j1-j2);;
+
+let compatible p l =
+	not (List.exists (come p) l)
+
+let queens n =
+	let rec completar path i j =
+		if i > n then Some path
+		else if j > n then None
+		else if compatible (i,j) path
+			then match completar ((i,j)::path) (i+1) 1 with
+				None -> completar path i (j+1)
+				| Some s -> Some s
+			else completar path i (j+1)
+	in completar [] 1 1;;
+
+
+
+let queens n = (2)
+	let rec completar path i j =
+		if i > n then Some path
+		else if j > n then raise Not_found
+		else if compatible (i,j) path
+			then try completar ((i,j)::path) (i+1) 1 with
+				Not_found -> completar path i (j+1)
+			else completar path i (j+1)
+	in completar [] 1 1;;
+
+try <e> with
+	<p1> -> <e1>
+	|...
+	| <pn> -> <en>`
+
+let find_opt p l =
+	try Some (List.find p l) with
+		Not_found -> None;;
+
+let nth_opt l n =
+	try Some (List.nth l n) with
+		Failure _ -> None;;`
+
+-----------------------DEFINICION DE NUEVOS TIPOS
+
+type numero = I of int | F of float;;
+
+AHORA SE PUEDE HACER [I 2; I 3; F 1.4; F 2.0];;
+
+let first_int = function
+	[] -> raise Not_found
+	| I n :: _ -> n
+	| _::t -> first_int t;;
+
+
+
+..........COSAS P8:
+
+queens: int -> (int*int) list list
+	N		lista de listas
+	
+is_queens_sol: int -> (int * int) list -> bool
+		N
+		
+		
+
+
+........otra teorica 21 nov
+
+type numero =
+	I of int |
+	F of float;;
+	
+let rec first_int = function
+	[] -> raise Not_found
+	| I n :: _ -> n
+	| _ :: t -> first_int t;;
+	
+type otroint = Otro of int;;
+type dobleint = L of int | R of int;;
+type intplus = Int of int | Na;;
+
+let div i1 i2 = match (i1,i2) with
+	(_, Int 0) -> Na
+	| (Int m, Int n) -> Int (m/n)
+	| _ -> Na;;
+	
+let (//) = div;; (*Puedes hacer Na // Na*)
+
+let (//) i1 i2 = match (i1,i2) with
+	(Int m, Int n) -> (try Int (m/n) with
+		Division_by_zero -> Na)
+	| _ -> Na;; (*ESTO NO ES DEL TRY WITH*)
+	
+type boolean = True | False;;
+
+let (!) = function
+	True -> False
+	| False -> True;;
+	
+Type palo = Corazon | Diamante | Pica | Trebol;;
+
+let es_rojo = function
+	Corazon | Diamante -> True
+	| _ -> False;;
+	
+let es_negro p = ! (es_rojo p);;
+
+type nat = One | Succ of nat;;
+
+let rec nat_of_int = function
+	1 -> One
+	| n -> Succ (nat_of_int (n-1));;
+	
+type entero = Pos of nat | Neg of nat | Zero;;
+
+let absoluto = function
+	Neg n -> Pos n
+	| e -> e;;
+	
+let opuesto = function
+	Neg n -> Pos n
+	| Pos n -> Neg n
+	| Zero -> Zero;;
+	
+type b' opcion = Algun of 'b | Ninguno;;
+
+type 'a otro = Otro of 'a;;
+
+type 'a lista = Vacia | Cons of 'a * 'a lista;;
+
+-----------------------------------------------------//ARBOLES
+
+type 'a bintree =
+	Empty
+	| Node of 'a * 'a bintree * 'a bintree
+	
+let t11 = Node (2, Empty, Empty);;
+let h x = Node (x, Empty, Empty);;
+
+let t12 = Node (6, h 5, h 11);;
+let t22 = Node (9, h 4, Empty);;
+let t1 = Node ( 7, t11, t12);;
+let t2 =  Node (5, Empty, t22);;
+let t = Node (2, t1, t2);;
+//Definicion de un arbol
+
+let rec nnodos = function
+	Empty -> 0
+	| Node (_, i, d) -> 1 + nnodos i + nnodos d
+	
+nnodos t;; -> 9
+
+let rec altura = function
+	Empty -> 0
+	| Node (_, i, d) -> 1 + max (altura i) (altura d);;
+	
+altura t;; -> 4;;
+
+let rec tmax = function
+	Empty -> raise (Invalid_argument "tmax")
+	| Node (r, Empty, Empty) -> r
+	| Node (r, rama, Empty) | Node (r, Empty, rama) -> max r (tmax rama)
+	| Node (r,i,d) -> max r (max (tmax i) (tmaxd))
+	
+tmax t;; -> 11
+
+let rec preorden = function
+	Empty -> []
+	| Node (r, i, d) -> r :: preorden i @ preorden d;;
+	
+let rec hojas = function
+	Empty -> []
+	| Node (r, Empty, Empty) -> [r]
+	| Node (r, i, d) -> hojas i @ hojas d;;
+	
+................. P9
+
+ArbolBinarioBusqueda/BinarySearchTree
+in_order : 'a bintree -> 'a lists
+msert: ('a -> 'a -> bool) -> 'a bintree > 'a -> 'a bintree
+bst: ('a -> 'a -> bool) -> 'a list -> 'a bintree
+qsort: ('a -> 'a -> bool) -> 'a list -> 'a list
+
+
+............... Arboles -> Árboles estrictamente binarios
+type 'a st_bintree =
+	Node of 'a * 'a st_bintree * 'a st_bintree
+	| Leaf of 'a;;
+	
+let rec hojas = function
+	Leaf v -> [v]
+	| Node (_, i, d) -> hojas i @ hojas d
+	
+let t_e = Node ('E', Leaf 'F', Leaf 'G');; (* DEFINICION DE NODO *)
+
+(*ARBOL DE LISTAS*)
+type 'a tree =
+	of 'a * 'a tree list;;
+	
+let s x = T (x,[]);; (* DEFINICION DE UN ARBOL ASI *)
+let t_6 = T(6, [s 5; s 11]);;
+let t_7 = T(7, [s 2; s 10; t_6]);;
+	
+List.map succ [3;5;7];; (* succ ES PARA INDICAR x+1 *)
+
+let rec nnodos (T (_, lr)) =
+	List.fold_left (+) 1 (List.map nnodos lr);;
+	
+let rec nnodos (T (_, lr)) =
+	List.fold_left (fun n t -> n + nnodos t) 1 lr;;
+
+
+let rec nnodos = function
+	T (_, []) -> l
+	| T (r, h::t) -> nnodos h + nnodos (T(r,t))
+	
+	
+(*DEFINICIONES DE FUNCIONES MUTUAMENTE RECURSIVAS*)
+let rec par n = (*n >= 0*)
+	n = 0 || impar (n-1)	
+and rec impar n = (*n >= 0*)
+	n <> 0 && par (n-1);;
+	
+(*PARTE IMPERATIVA*)
+#load "counter.cmo";;
+(*Puedes usar open para evitar andar poniendo Counter. seguido*)
+
+Counter.next;;
+- : unit -> int = <fun>
+open Counter;;
+next;;
+- : unit -> int = <fun>
+	
+next ();;
+- : int = 1;;
+next ();;
+- : int = 2;;
+
+(*DEMOSTRACION DE QUE let NO ES UNA VARIABLE*)
+let l = 0;;
+let next = function () ->
+	l + 1;;
+	
+	
+ref;;
+ref 0;;
+let n = ref 0;; (* ref cada vez que se aplica da una caja nueva *)
+n;;
+n + 1;; (*ERROR*)
+
+(!);;
+!n;;
+!n + 1;;
+(:=);;
+n := !n + 1;;o
+
+let n = ref 0;;
+let next () = (*next de unit*)
+	let _ = n:= !n + 1 in
+	!n;;
+	
+(while <b> do <e> done) : unit
+(for <i> = <i1> to <i2> do <e> done) : unit
+
+let rec fact = n
+	if n <= 0 then 1
+	else n * fact (n-1);;
+	
+let fact n =
+	let i = ref 2 in
+	let f = ref 1 in
+	while !i <= n do
+		f := !f * !i;
+		i := !i + 1
+	done;
+	!f;;
+	
+let fact n =
+	let f = ref 1 in
+	for i = 2 to n do
+		f := !f * i
+	done;
+	!f;;
+	
+let v = [|1; 2; 3|];;
+v.(1);;
+v.(2) <- 2 * v.(2) + v.(1);;
+v;;
+Array.length v;;
+Array.get v 2;; / open Array;; get v 2;;
+set v 0 100;;
+Array.init 1000 (fun i -> 2 * i);;
+Array.make 1000 'a';;
+
+let v = Array.make 20 (ref 0);; (* Esto es de gente nashe *)
+v.(0) := 7;;
+v;; (* sorpresa, metes la misma variable en todos *)
+let v = Array.init 20 (fun _ -> ref 0);; (* ASI LO ARREGLAS *)
+
+
+_____DEFINICION DE TIPO MUTABLE_____
+type person = {name : string; age : int}
+
+let p1 = {name = "Pepe"; age = 49};;
+let p2 = {age = 19; name = "Rosa"};;
+p2.name;;
+p1.age <p2.age;;
+
+let order p =
+	{name = p.name; age = succ p.age};;
+older p1;;
+p1;;
+
+let order {name = n; age = a} =
+	{name = n; age = succ a};;
+	
+let order p =
+	{p with age = succ p.age};;
+
+
+let person = {name : string; mutable age : int};;
+type person = {name = "Pepe"; age = 49};;
+let p2 = {age = 19; name = "Rosa"};;
+older p1;;
+p1;; (*ASI NO*)
+p1.age <- 18;;
+p1;; (*ASI SI*)
+
+let aged p =
+	p.age <- succ p.age;;
+
+aged p1;;
+p1;;
+
+
+type 'a var = {mutable valor : 'a};;
+let initvar x = {valor = x};;
+let n = initvar 3;;
+
+let (!!) v = v.valor;;
+!!n;;
+
+let (<<) v x = v.valor <- x;;
+<< n 7;;
+n << 7;;
+n << !!n + 1;;
+n;;
+
+let n = ref 0;;
+let next() =
+	n := !n+1;
+	!n;;
+let reset() =
+	n := 0;;
+	
+__CREACION MODULOS__
+module Contador : sig
+	val next : unit -> int
+	val reset : unit -> unit
+end = struct 
+	let n = ref 0
+	let next () =
+		n := !n + 1;
+		!n
+	let reset() =
+		n := 0
+end;;
+
+module Fruta : sig val next : unit -> ...
+module Carne : sig val next : unit -> ...
+Carne.next ();;
+Carne.next ();;
+Fruta.next ();;
+
+_______OCAML PROGRAMACION ORIENTADA A OBJETOS________ (Me falta los apuntes de una clase ??¿¿)
+
+
+let doble c = 2 * c#next;;
+
+let counter = object
+	val mutable n = 0
+	method next = n <- n + 1; n
+	method reset = n <- 0
+end;;
+
+counter#next, counter#next;;
+counter#next + 2 * counter#next;;
+
+doble counter;;
+
+let new_counter () = object
+	val mutable n = 0
+	method next = n <- n+1 ; n
+	method reset = n <- 0
+end;;
+	
+let c1 = new_counter ()
+and c2 = new_counter ();;
+let clon = Oo.copy c2;;
+clon = c2;; -> FALSE
+elt clon = c2;;
+clon = c2;; -> TRUE
+
+
+class counter = object
+	val mutable n = 0
+	method next = n <- n + 1; n
+	method reset = n <- 0
+end;;
+
+class virtual counter = object
+	val mutable n = 0
+	method next = n <- n + 1; n
+	method virtual reset : int
+end;;
+
+
+class counter_with_set = object
+	inherit counter
+	method set x = n <- x
+end;;
+
+class counter_with_init ini = object (self)  //ALIAS
+	inherit counter_with_set
+	method reset = (*n <- ini*)
+			self#set ini
+	initializer (* n <- 0 *) self#reset
+end;;
+	
+class counter_with_step = object (self)
+	inherit counter_with_init 0 as super
+	val mutable step = 1
+	method next = n <- n + step; n
+	method set_step s = step <- s
+	method reset = super#reset; self#set_step 1
+end;;
+
+class counter_with_max max = object (self)
+	inherit counter_with_step as super
+	method next =
+		let next = super#next in
+		if next > max
+		then (self#reset; self#next)
+		else next
+end;;
+
+class ['a] stack =
+	object
+		val mutable l = ([] : 'a list)
+		method push x =
+			l <- x :: l
+		method pop = match l with
+			[] -> raise EmptyStack
+			| h :: t -> l <- t; h
+		method peek = match l with
+			[] -> raise EmptyStack
+			| h::_ -> h
+end;;
+pila#pop (* DA ERROR DE EMPTYSTACK *)
+
+
+	
+class counter2 = object
+	inherit counter as super
+	method next = ignore super#next; super#next
+end;;
+
+let ignore _ = ();; (*ESTO SIRVE PARA QUE IGNORE CUALQUIER COSA Y DEVUELVA UNIT*)
+	
+	
+(*Sip, esto me falta de otra clase*)
+	
+	
+	
+class virtual counter = object
+	val mutable n = 0
+	method next = n <- n + 1; n
+	method vritual reset : unit
+end;;
+	
+	
+	
+	
+	
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+.......... PRACTICA COMPETITIVA CAMINO MINIMO
+let v = [|[|6; 2; 1; 1; 6|]; [|6; 5; 1; 2; 1|]; [|1; 2; 3; 1; 1|]; [|1; 8; 6; 5; 1|]|];;
+
+let min4 (a, b, c, d) =
+  min (min a b) (min c d);;
+  
+(*CONCEPTO*)
+let min_weight_path v ini fin =
+  let rec aux listaTocados i j min path=
+    if i = fst fin && j = snd fin then min else
+      if List.mem [i,j] listaTocados then min else
+        let nuevoTocados = (i, j) :: lista_tocados in
+        let nuevoPeso = peso_actual + v.(i).(j) in
+        let nuevoCamino = (i, j) :: mejor_camino in
+        min4 ((aux listaTocados i-1 j), (aux listaTocados i+1 j), (aux listaTocados i j-1), (aux listaTocados i j+1))
+        if i = fst ini && j = snd ini then path (*Para asegurar que la recursion no devuelva algo del medio*)
+
+  in if ini = fin then [ini] 
+    else if valid_path (Array.length v) (Array.length v.(0)) ini fin 
+      then aux [] (fst ini) (snd ini) 0 [ini] 
+      else failwith "Busqueda no valida";;
+
+(*VERSION 1.0*)
+
+let min4 (a, b, c, d) =
+  min (min (fst a) (fst b)) (min (fst c) (fst d));;
+
+let min_weight_path v ini fin =
+  let rec aux i j mini path=
+    if i = fst fin && j = snd fin then (mini, path) else
+      if List.mem (i,j) path then (max_int, path) else
+        let nuevo_path = (i, j) :: path in
+        let nuevo_min = mini + v.(i).(j) in
+        let caminoMIN = min4 ((aux (i-1) j nuevo_min nuevo_path), (aux (i+1) j nuevo_min nuevo_path), (aux i (j-1) nuevo_min nuevo_path), (aux i (j+1) nuevo_min nuevo_path)) in
+        caminoMIN
+
+  in if ini = fin then [ini] 
+    else if valid_path (Array.length v) (Array.length v.(0)) ini fin 
+      then aux (fst ini) (snd ini) 0 [ini] 
+      else failwith "Busqueda no valida";;
+
+(* VERSION 1.1 *)
+let min4 (a, b, c, d) =
+  let min_ab = if fst a < fst b then a else b in
+  let min_cd = if fst c < fst d then c else d in
+  if fst min_ab < fst min_cd then min_ab else min_cd;;
+
+let min_weight_path v ini fin =
+  let rec aux i j mini path =
+    if i = fst fin && j = snd fin then (mini, path) else
+      if List.mem (i, j) path then (max_int, path) else
+        let nuevo_path = (i, j) :: path in
+        let nuevo_min = mini + v.(i).(j) in
+        let caminoMIN =
+          min4
+            ( (if i - 1 >= 0 then aux (i - 1) j nuevo_min nuevo_path else (max_int, path)),
+              (if i + 1 < Array.length v then aux (i + 1) j nuevo_min nuevo_path else (max_int, path)),
+              (if j - 1 >= 0 then aux i (j - 1) nuevo_min nuevo_path else (max_int, path)),
+              (if j + 1 < Array.length v.(0) then aux i (j + 1) nuevo_min nuevo_path else (max_int, path)) )
+        in
+        caminoMIN
+  in if ini = fin then [ini] else aux (fst ini) (snd ini) 0 [ini];;
+  
+(* VERSION DEBUGGER *)
+let min_weight_path v ini fin =
+  let rec aux i j mini path =
+    Printf.printf "Current position: (%d, %d), Mini: %d\n" i j mini;
+    if i = fst fin && j = snd fin then (
+      Printf.printf "Reached destination\n";
+      (mini, path)
+    ) else if List.mem (i, j) path then (
+      Printf.printf "Already visited\n";
+      (max_int, path)
+    ) else
+      let nuevo_path = (i, j) :: path in
+      let nuevo_min = mini + v.(i).(j) in
+      let caminoMIN =
+        min4
+          ( (if i - 1 >= 0 then aux (i - 1) j nuevo_min nuevo_path else (max_int, path)),
+            (if i + 1 < Array.length v then aux (i + 1) j nuevo_min nuevo_path else (max_int, path)),
+            (if j - 1 >= 0 then aux i (j - 1) nuevo_min nuevo_path else (max_int, path)),
+            (if j + 1 < Array.length v.(0) then aux i (j + 1) nuevo_min nuevo_path else (max_int, path))
+          )
+      in
+      Printf.printf "Backtracking\n";
+      caminoMIN
+  in
+  if ini = fin then [ini] else snd (aux (fst ini) (snd ini) 0 []);;
+
+(* ALGORITMO DE BUSQUEDA DE CAMINOS DE GRAFOS DIRIGIDOS DIJKSTRA *)
+
+let errorcheck v =
+  let cols = Array.length v in
+  let fils = Array.length v.(0) in
+  fils > 0 && cols > 0 && cols = fils && Array.for_all (fun fila -> Array.length fila = cols) v;;  
+
+let dijkstra v =
+  let nodosTOTAL = Array.length v in
+  let distancia = Array.make_matrix nodosTOTAL nodosTOTAL None in
+
+  if not (errorcheck v) then invalid_arg"dijkstra" else
+
+  for i = 0 to nodosTOTAL - 1 do
+    let padre = Array.make nodosTOTAL None in
+    let visto = Array.make nodosTOTAL false in
+    let colaPrio = ref empty in
+
+    distancia.(i).(i) <- Some 0;
+    colaPrio := insert !colaPrio 0 i;
+
+    while !colaPrio <> Empty do
+      match extract !colaPrio with
+      | Some (prioridad, pos, colaNUEVA) ->
+          colaPrio := colaNUEVA;
+          if not visto.(pos) then
+            visto.(pos) <- true;
+            for j = 0 to nodosTOTAL - 1 do
+              match v.(pos).(j) with
+              | Some peso -> 
+                let current_distance = distancia.(i).(j) in
+                let nueva_distancia = match distancia.(i).(pos) with
+                  | Some d -> d + peso
+                    | None -> failwith "Otra vez sale de la matriz" in
+                if not visto.(j) && (match current_distance with
+                  | Some d -> nueva_distancia < d
+                  | None -> true) then begin
+                    distancia.(i).(j) <- Some nueva_distancia;
+                    padre.(j) <- Some pos;
+                    colaPrio := insert !colaPrio nueva_distancia j;
+                  end
+              | None -> ()
+            done;
+      | None -> ()
+    done;
+  done;
+  distancia;;
+  
+  
+  
+  VERSION SIN "ref" (NO FUNCIONA BIEN)
+
+let dijkstra v =
+  if not (errorcheck v) then invalid_arg "dijkstra" else (* Comprobación de seguridad *)
+  let nodosTOTAL = Array.length v in (* Número de nodos para crear matrices iguales cuadradas*)
+  let distancia = Array.make_matrix nodosTOTAL nodosTOTAL None in (* Esta es la matriz que se devuelve*)
+
+  for i = 0 to nodosTOTAL - 1 do
+    let padre = Array.make nodosTOTAL None in (* Auxiliar *)
+    let visto = Array.make nodosTOTAL false in (* Auxiliar de booleanos *)
+    let colaPrio = insert empty 0 i in (*Crea la cola de prioridad *)
+    distancia.(i).(i) <- Some 0; (* Iniciamos el nodo a 0, el peso más bajo no negativo *)
+
+    let rec aux_calcular colaPrio =
+      match extract colaPrio with
+      | Some (prioridad, pos, colaNUEVA) -> (* Mientras no esté vacía, sacamos 3 valores de los cuales nos interesa 2 *)
+        if not visto.(pos) then begin (*Si el nodo no fue visitado, empezamos el cálculo*)
+          visto.(pos) <- true; (* Se marca como visto *)
+          for j = 0 to nodosTOTAL - 1 do
+            match v.(pos).(j) with (* Se obtiene el valor del peso de la arista *)
+            | Some peso ->
+                let pesoActual = distancia.(i).(j) in
+                let pesoNuevo =
+                  match distancia.(i).(pos) with (* Comprobación de que es capaz de sacar el peso *)
+                  | Some d -> d + peso
+                  | None -> failwith "Otra vez este error"
+                in
+                if not visto.(j) && (match pesoActual with
+                  | Some d -> pesoNuevo < d
+                  | None -> true) then
+                    distancia.(i).(j) <- Some pesoNuevo;
+                    padre.(j) <- Some pos;
+                    aux_calcular (insert colaNUEVA pesoNuevo j);
+            | None -> () (* Esto es que hay un None ya que son dirigidos *)
+          done; (* done del for (j) *)
+        end
+        else aux_calcular colaNUEVA
+      | None -> () (*Si no hay ningún elemento no hace nada y sigue el bucle for principal *)
+    in aux_calcular colaPrio; (* Empieza el bucle aquí *)
+  done; (* done del for principal *)
+  distancia;;
