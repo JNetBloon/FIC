@@ -1,0 +1,13 @@
+Instructions:
+
+1) Unzip the content of the file P1.zip in the desired folder.
+2) In CLion, in the menu File, select "Open".
+3) Select the folder P1 that was contained in the zip.
+4) If CLion asks for confirmation to open the project, select "Trust Project".
+5) In the project opening wizard ("Open Project Wizard"), select the first box "Reload CMake project on editing CMakeList.txt" and press "OK".
+6) In the file config.cmake of the project you can select which list to use (dynamic or static).
+7) In the same file you can also select the input file for the main program.
+8) Do not modify the file CMakeLists.txt.
+9) To run the program from CLion, select "main" or "test_lists" in the run configuration drop-down menu at the top right.
+10) To run the program on the command line, place yourself in the folder bin. The executables are placed there when the program is compiled.
+11) For convenience, the input files can be placed in the folder bin.

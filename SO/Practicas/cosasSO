@@ -1,0 +1,228 @@
+--CALIFICACIONES--
+P1: 	0,6/0,8
+P2: 	0,6/0,85
+P3: 	0,6/0,85
+TOTAL:	1,80/2,5
+-------------------
+NOTAS:
+	Hicimos todas las funciones en el main, están ordenadas por prácticas y separadas de mala manera.
+Si estás haciendo las prácticas, separalas por ficheros, no hagas como nosotros
+
+-----------------
+
+
+remove no es lo ideal al borrar
+Mejor se usa unlink o rmdir
+
+........................ LSTAT VR STAT
+La principal diferencia entre lstat y stat en C es cómo manejan los enlaces simbólicos. stat sigue los enlaces simbólicos y proporciona información sobre el archivo o directorio al que apuntan, mientras que lstat no los sigue y proporciona información sobre el propio enlace simbólico. Usa stat para obtener detalles del archivo final y lstat para información sobre el enlace simbólico en sí.
+...................
+
+--Macros para el manejo de errores:
+perror: Muestra un mensaje de error relacionado con el último error de sistema.
+errno: Variable global que almacena el código de error del último error de sistema.
+Macros para verificar el tipo de archivo o directorio:
+
+S_ISREG(mode): Verifica si el modo mode representa un archivo regular.
+S_ISDIR(mode): Verifica si el modo mode representa un directorio.
+S_ISLNK(mode): Verifica si el modo mode representa un enlace simbólico.
+
+--Macros de comparación:
+NULL: Representa un puntero nulo.
+EOF: Indica el final de un archivo.
+
+--Macros de tamaño:
+sizeof: Devuelve el tamaño en bytes de un tipo de dato o una variable.
+
+--Macros matemáticas:
+INT_MAX, INT_MIN: Valores máximos y mínimos para un int.
+FLT_MAX, FLT_MIN: Valores máximos y mínimos para un float.
+
+--Macros de manipulación de bits:
+BIT(x): Crea una máscara de bits con el bit x en 1.
+
+--Macros de control de flujo:
+#define: Se utiliza para definir macros personalizadas.
+
+--Macros específicas del sistema o del compilador:
+Algunas macros pueden variar según el sistema operativo o el compilador. Por ejemplo, _WIN32 es una macro que suele estar definida en sistemas Windows, mientras que __unix__ es una macro que indica un sistema Unix.
+
+.............
+VER ARCHIVOS HUERFANOS
+rmlint -g
+
+.............
+PARA COMPROBAR EL COMPARTIR CON SHARED:
+
+ipcrm -m 32773
+# Elimina un segmento de memoria compartida con el ID 32773
+
+ipcrm
+# Elimina recursos IPC (Inter-Process Communication) especificados (sin argumentos, no hace nada).
+
+ipcs
+# Muestra información sobre los recursos IPC (memoria compartida, semáforos y colas de mensajes) en el sistema.
+
+.............
+COSAS TEORICAS PARA LA SHELL
+
+(TERMINAL) whoami -> Imprime quien eres
+(TERMINAL) ls -ld /tmp -> Muestra lo que hay en el directorio temporal (Todos los procesos pueden acceder a los directorios)
+(TERMINAL) cp shell.out /tmp
+(TERMINAL) ls -las /home/nombre/PrivateDirNombre/ -> Imprime permisos y cosas del directorio
+(TERMINAL) su <user> -> Entras a un usuario
+
+xclock -update 1
+# ejecuta el programa xclock con la opción -update 1, que actualiza el reloj cada segundo.
+
+------------------------------------------------------------------------------------------------- PRACTICA P3 (ULTIMATE)
+La función uid o "user identifier" (identificador de usuario) en un sistema Unix-like se refiere al ID de usuario. Este identificador de usuario es utilizado por el sistema operativo para determinar los permisos y la autoridad que tiene un usuario sobre diferentes recursos del sistema.
+
+-get: Esta opción solicitaría al programa que imprima el ID de usuario actual (getuid()) y el ID de usuario efectivo (geteuid()). El ID de usuario efectivo puede ser diferente del ID de usuario si el programa tiene permisos elevados (por ejemplo, si se ejecuta con privilegios de superusuario).
+
+-set id: Esta opción establecería el ID de usuario efectivo (seteuid(id)) al valor numérico proporcionado. Cambiar el ID de usuario efectivo puede afectar los permisos de acceso del programa a ciertos recursos.
+
+-set -l id: Esta opción establecería el ID de usuario efectivo al ID de usuario asociado con el nombre de usuario proporcionado. Esto es útil para cambiar las credenciales del programa a las de otro usuario sin necesidad de conocer el ID numérico.
+
+_____uid -get______
+
+En sistemas Unix-like, incluyendo Linux, el rango de valores para el UID (User ID o identificador de usuario) es típicamente de 0 a 65535. Sin embargo, existen algunas restricciones y convenciones dentro de este rango:
+
+0 (Zero): El UID 0 está reservado para el superusuario o root. Este usuario tiene privilegios elevados y puede realizar acciones que están fuera del alcance de otros usuarios. Cambiar a este UID es una forma común de adquirir privilegios de administrador.
+
+1 a 99: Tradicionalmente, los UIDs del 1 al 99 están reservados para usuarios del sistema o cuentas de servicios específicos.
+
+100 a 65535: Este rango está disponible para la asignación de UIDs a usuarios regulares. Por convención, los UIDs en el rango de 1000 a 65535 son generalmente asignados a usuarios no privilegiados.
+
+
+_____uid -set_____
+Credencial Real (Real Credential):
+
+La credencial real se refiere a las verdaderas credenciales del usuario que inició el proceso. Es el UID (User ID) real y GID (Group ID) real del usuario.
+La credencial real no cambia, independientemente de las acciones que el proceso pueda realizar después de iniciar su ejecución.
+Incluso si un proceso tiene privilegios elevados momentáneamente, la credencial real seguirá siendo la del usuario que inició el proceso.
+
+--Credencial Efectiva (Effective Credential):
+
+La credencial efectiva es la credencial que determina los privilegios que un proceso puede ejercer en un momento dado.
+A diferencia de la credencial real, la credencial efectiva puede cambiar durante la ejecución del proceso. Puede ser modificada para darle al proceso temporales privilegios adicionales.
+Cambiar la credencial efectiva es común cuando se requiere realizar tareas que necesitan privilegios elevados, pero se desea minimizar el tiempo durante el cual el proceso tiene esos privilegios.
+
+_______FORK________
+
+Cuando se llama a la función fork, el sistema operativo crea una copia exacta del proceso que realiza la llamada (el proceso padre). Ambos, el proceso padre y el proceso hijo, comienzan su ejecución a partir del mismo punto en el código.
+
+--Diferenciación entre Proceso Padre y Hijo:
+Después de la llamada a fork, el sistema operativo necesita distinguir entre el proceso padre y el proceso hijo. Para hacer esto, fork devuelve un valor diferente en cada proceso:
+En el proceso padre, fork devuelve el ID del proceso hijo recién creado (un número entero mayor que 0).
+En el proceso hijo, fork devuelve 0.
+
+--Continuación de la Ejecución:
+A partir de la llamada a fork, ambos procesos (padre e hijo) continúan ejecutándose de forma independiente, cada uno con su propio espacio de memoria y su propio contexto de ejecución.
+Las modificaciones realizadas por uno de los procesos no afectan al otro, ya que tienen sus propios conjuntos de recursos y variables.
+
+--Espera del Proceso Padre al Proceso Hijo:
+Es común que el proceso padre espere a que el proceso hijo termine su ejecución antes de continuar con sus propias tareas. Esto se hace utilizando la función wait o waitpid.
+La espera asegura que el proceso padre no finalice antes que el proceso hijo, evitando así que el sistema operativo quede con procesos huérfanos.
+
+
+_____EXEC_____
+La función exec en sistemas operativos tipo Unix se utiliza para ejecutar un programa sin crear un nuevo proceso. Básicamente, lo que hace es cargar un nuevo programa en el espacio de direcciones del proceso actual, reemplazando el código y datos del proceso actual con los del nuevo programa. La sintaxis general del comando exec es:
+
+exec prog [args] [@priority] [VAR1 VAR2...]
+
+Donde:
+
+prog: Es el programa que se ejecutará.
+[args]: Son los argumentos que se pasarán al programa.
+[@priority]: Es una prioridad opcional.
+[VAR1 VAR2...]: Son las variables de entorno opcionales.
+El uso de exec en un programa C se realiza mediante las funciones de la familia exec como execl, execv, execle, etc., que permiten especificar el programa a ejecutar, los argumentos y las variables de entorno. El proceso actual se reemplaza por el nuevo programa.
+
+--Otras:
+execlp
+execve
+execvp
+
+......................
+ps -e -o pid,ppid,ni,cmd
+
+se utiliza para mostrar una lista de todos los procesos en el sistema, incluyendo información específica sobre cada proceso. Aquí se desglosa lo que hace cada opción:
+-e: Muestra todos los procesos en el sistema.
+-o: Formatea la salida según los campos especificados, en este caso:
+pid: Muestra el ID del proceso.
+ppid: Muestra el ID del proceso padre.
+ni: Muestra el valor de la prioridad (nice value) del proceso.
+cmd: Muestra el comando con el que se inició el proceso.
+
+ps aux | grep xclock
+# Busca y muestra los procesos relacionados con xclock. Linea que podria salir:
+jimmy       7717  0.0  0.0   6576  2432 pts/1    S+   17:55   0:00 grep --color=auto xclock
+
+pgrep -af xclock
+# Lista los procesos cuyo nombre o comando contiene xclock, mostrando tanto el PID como la línea completa del comando.
+
+--MATAR PROCESOS--
+kill -9 <pid>
+kill -STOP <pid>
+kill -CONT <pid>
+
+---------PRIORIDADES DE PROCESOS---------
+
+nice -n NUM comando
+# Iniciar un nuevo comando con una prioridad modificada
+
+renice -n NUM -p PID
+# Cambia la prioridad de un proceso existente con el PID especificado a la prioridad NUM.
+-----------------------------------------
+
+--FUNCION PARA CREAR PROCESOS HIJO CON LA APLICACION xclock--
+
+void xclock(char *tr[]) {
+    pid_t pid;
+
+    // Creamos un nuevo proceso hijo
+    pid = fork();
+
+    if (pid < 0) {
+        // Error al crear el proceso hijo
+        fprintf(stderr, "Error al crear el proceso hijo\n");
+        exit(EXIT_FAILURE);
+    } else if (pid == 0) {
+        // Código del proceso hijo
+
+        // Verificamos si se debe ejecutar en segundo plano
+        if (tr[1] != NULL && strcmp(tr[1], "&") == 0) {
+            // Configuramos el proceso hijo para ignorar la señal SIGHUP
+            // Esto permite que el proceso hijo continúe ejecutándose incluso si el proceso padre termina
+            signal(SIGHUP, SIG_IGN);
+
+            // Creamos una nueva sesión para el proceso hijo
+            setsid();
+        }
+
+        // Ejecutamos xclock
+        if (execlp(tr[0], tr[0], (tr[1] && strcmp(tr[1], "&") == 0) ? NULL : tr[1], NULL) < 0) {
+            fprintf(stderr, "Error al ejecutar %s\n", tr[0]);
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        // Código del proceso padre
+
+        // Si es en segundo plano, no esperamos al proceso hijo
+        if (!(tr[1] != NULL && strcmp(tr[1], "&") == 0)) {
+            // Esperamos a que el proceso hijo termine
+            int status;
+            waitpid(pid, &status, 0);
+
+            if (WIFEXITED(status)) {
+                printf("Proceso hijo (%s) terminado con estado: %d. Proceso padre continúa ejecución.\n", tr[0], WEXITSTATUS(status));
+            } else if (WIFSIGNALED(status)) {
+                printf("Proceso hijo (%s) terminado debido a la señal: %d. Proceso padre continúa ejecución.\n", tr[0], WTERMSIG(status));
+            }
+        } else {
+            printf("Proceso hijo en segundo plano. Proceso padre continúa ejecución.\n");
+        }
+    }
+}
+

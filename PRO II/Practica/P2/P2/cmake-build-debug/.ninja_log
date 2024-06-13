@@ -1,0 +1,10 @@
+# ninja log v5
+2	75	7023387655694261	CMakeFiles/test_jury_list.dir/jury_list.c.obj	b13c678dd79b959b
+1	186	7108988731920000	build.ninja	a9ba2f4d50ffe38b
+2	92	7023373251912234	CMakeFiles/test_participant_list.dir/participant_list.c.obj	4df9d5b29226f493
+6	90	7023373251883356	CMakeFiles/test_participant_list.dir/test_participant_list.c.obj	1aaf184b4e8e357f
+2	70	7023373679917014	CMakeFiles/test_jury_list.dir/test_jury_list.c.obj	7e89bdd730da9a09
+7	117	7035328226599083	CMakeFiles/main.dir/jury_list.c.obj	4de4a6a3897dd829
+11	129	7035328226780609	CMakeFiles/main.dir/participant_list.c.obj	ba16097b301ba5ed
+2	95	7035340561644407	CMakeFiles/main.dir/main.c.obj	2672040024804b12
+123	280	7035086745669506	../bin/main.exe	bad53336e555aa2c

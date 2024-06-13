@@ -1,0 +1,68 @@
+---INFORME---
+
+->Equipo:
+	ANONIMO
+
+->Especificaciones del equipo donde se realizó la prueba
+	VER NOTAS
+
+->Introducción a la práctica
+	Fue realizada en el lenguaje de programación C. El objetivo es comprobar la complejidad de 2 algoritmos de ordenación.
+Para ello usamos una función proporcionada por el profesorado que obtiene el tiempo al ordenador (En microsegundos) para luego compararla con otra al acabar la ejecución del algoritmo a probar.
+El principal problema de esto eran los tiempos bajos, ya que tienden a ser más inexactos. Para ello usamos condición en la que si el tiempo de t(n) era menor a 500, repitiese el proceso con un valor K (Múltiplo de 10) = 100
+Explicados los fundamentos de la práctica, véase los tiempos obtenidos en el proceso.
+
+	El objetivo del algoritmo es encontrar la suma máxima de una subsecuencia contigua en un vector. Para ello, el primero de ellos, sumaSubMax1, utiliza dos bucles anidados para probar todas las subsecuencias del vector. Por cada número, calcula la suma de la subsecuencia de la iteración y la compara con la mayor suma hasta ese momento.
+La segunda, sumaSubMax2,  utiliza un solo bucle con dos variables auxiliares, una para la suma máxima temporal (sumaMax) y otra para sumar la subsecuencia (estaSuma).
+
+	Es importante recalcar que las filas de las tablas de tiempos que cuentan con un (*) son las que cumplieron la condición explicada anteriormente (t(n) < 500), y las anomalias están marcadas con #.
+
+->Tiempos
+	
+
+
+
+SUBMAX1 
+	
+	      n         t(n)   t(n)/n^1.8     t(n)/n^2   t(n)/n^2.2
+(*)	    500      161.270     0.002236     0.000645     0.000186
+	   1000      641.000     0.002552     0.000641     0.000161
+	   2000     2599.000     0.002971     0.000650     0.000142
+	   4000    10472.000     0.003438     0.000655     0.000125
+	   8000    41903.000     0.003951     0.000655     0.000109
+	  16000   169346.000     0.004585     0.000662     0.000095
+	  32000   688609.000     0.005354     0.000672     0.000084
+			     Subestimada     Estimada   Sobrestimada	
+
+Cota subestimada -> n^1.8   -> Tiende a infinito
+Cota estimada      -> n^2 -> Tiende a 0.0065
+Cota sobrestimada -> n^2.2 	-> Tiende a 0
+
+En esta medición podemos ver que los tiempos se estabilizan correctamente en torno a los 0.00064 segundos, sin presentar ninguna anomalía visible, tan solo un tiempo que tuvo que entrar en el bucle de repetición, ya que se cumplió la condición (t(n) < 500).
+
+SUBMAX2 
+
+	      n         t(n)   t(n)/n^0.8     t(n)/n^1   t(n)/n^1.2
+(*)#	    500        1.610     0.011160     0.003220     0.000929	
+(*)#	   1000        2.080     0.008281     0.002080     0.000522	
+(*)	   2000        3.080     0.007042     0.001540     0.000337
+(*)	   4000        6.340     0.008326     0.001585     0.000302
+(*)	   8000       12.350     0.009315     0.001544     0.000256
+(*)	  16000       23.310     0.010098     0.001457     0.000210
+(*)	  32000       44.990     0.011194     0.001406     0.000177
+			     Subestimada     Estimada   Sobrestimada
+
+Cota subestimada -> n^0.8   -> Tiende a infinito
+Cota estimada      -> n^1 -> Tiende a 0.0014
+Cota sobrestimada -> n^1.2 	-> Tiende a 0
+
+En esta medición podemos ver que los tiempos se estabilizan con algo de dificultad en torno a los 0.0014 segundos,presentando dos anomalías visibles, en las dos primeras mediciones, debido posiblemente al gran número de repeticiones que debió de calcular el algoritmo de medición de tiempos al cumplir varias veces la condicioń (t(n) < 500). En este caso todas las mediciones cumplieron la condición (t(n) < 500), por lo que se tuvo que realizar la medición de tiempos varias veces.
+
+->Conclusión
+
+En conclusión, como podemos observar, entre los dos algoritmos de ordenación, siempre vamos a preferir sumaSubMax2, debido a su complejidad lineal O(n), lo que la hace ejecutarse en unos tiempos muchos más bajos respecto al algoritmo de ordenación sumaSubMax1, cuya complejidad cuadrática O(n²), la hace mucho más lenta a la hora de calcular los tiempos, sin meternos ya en vectores de grandes posiciones, donde este algoritmo tarda tiempos altísimos.
+
+
+
+
+

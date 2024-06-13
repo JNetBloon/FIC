@@ -1,0 +1,16 @@
+01 C Jury1 10
+02 S
+03 C Jury2 10
+04 S
+05 C Jury3 10
+06 S
+07 N Jury1 Country1 eu
+08 S
+09 N Jury2 Country1 eu
+10 S
+11 N Jury3 Country1 eu
+12 S
+13 V Jury3 Country1
+14 S
+15 R
+16 S

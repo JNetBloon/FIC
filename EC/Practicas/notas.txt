@@ -1,0 +1,10 @@
+# COSAS EJECUCION
+valgrind --tool=cachegrind ls
+
+gcc -g tmp.c
+valgrind --tool=cachegrind ./a.out
+cg_annotate ./a.out
+
+Si tienes valgrind V3.21 en adelante añadir
+--cache-sim=yes
+

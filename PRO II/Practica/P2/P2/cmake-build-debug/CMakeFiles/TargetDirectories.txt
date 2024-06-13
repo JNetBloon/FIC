@@ -1,0 +1,5 @@
+G:/Mi unidad/Pro II/P2NW/cmake-build-debug/CMakeFiles/test_participant_list.dir
+G:/Mi unidad/Pro II/P2NW/cmake-build-debug/CMakeFiles/test_jury_list.dir
+G:/Mi unidad/Pro II/P2NW/cmake-build-debug/CMakeFiles/main.dir
+G:/Mi unidad/Pro II/P2NW/cmake-build-debug/CMakeFiles/edit_cache.dir
+G:/Mi unidad/Pro II/P2NW/cmake-build-debug/CMakeFiles/rebuild_cache.dir

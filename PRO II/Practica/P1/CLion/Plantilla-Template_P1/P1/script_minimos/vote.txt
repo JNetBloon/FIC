@@ -1,0 +1,8 @@
+01 N Country1 eu
+02 S 10
+03 N Country2 non-eu
+04 S 10
+05 V Country2
+06 S 10
+07 V Country3
+08 S 10

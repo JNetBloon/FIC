@@ -1,0 +1,36 @@
+********************
+01 N: participant Country1 location eu
+* New: participant Country1 location eu
+********************
+02 S: totalvoters 10
+Participant Country1 location eu numvotes 0 (0.00%)
+Null votes 0
+Participation: 0 votes from 10 voters (0.00%)
+********************
+03 N: participant Country2 location non-eu
+* New: participant Country2 location non-eu
+********************
+04 S: totalvoters 10
+Participant Country1 location eu numvotes 0 (0.00%)
+Participant Country2 location non-eu numvotes 0 (0.00%)
+Null votes 0
+Participation: 0 votes from 10 voters (0.00%)
+********************
+05 N: participant Country3 location eu
+* New: participant Country3 location eu
+********************
+06 S: totalvoters 10
+Participant Country1 location eu numvotes 0 (0.00%)
+Participant Country2 location non-eu numvotes 0 (0.00%)
+Participant Country3 location eu numvotes 0 (0.00%)
+Null votes 0
+Participation: 0 votes from 10 voters (0.00%)
+********************
+07 D: participant Country1
+* Disqualify: participant Country1 location eu 
+********************
+08 S: totalvoters 10
+Participant Country2 location non-eu numvotes 0 (0.00%)
+Participant Country3 location eu numvotes 0 (0.00%)
+Null votes 0
+Participation: 0 votes from 10 voters (0.00%)

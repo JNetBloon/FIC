@@ -1,0 +1,15 @@
+-> Especificaciones del equipo donde se realizó la prueba
+
+Chasis: Laptop
+Sistema Operativo: Ubuntu 23.04
+Kernel: Linux 6.2.0-39-generic
+Arquitectura: x86_64
+Modelo de CPU: 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz
+RAM: 8 GB
+
+-> Calificaciones
+P1: 7
+P2: 8
+P3: 8
+P4: 9
+NOTA TOTAL: 8

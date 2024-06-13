@@ -1,0 +1,100 @@
+((40* 10^(12)) -> 40 son los ciclos del programa monociclo que tarda en ejecutarse al completo
+-------------
+(200*10^(9))) -> 200 GHz de reloj
+
+66*((10^(9))/(2*10^(9))) -> 2 GHz de reloj
+
+c.le.s $f0, $f12 -> Calcular la comparacion. Se guarda en STATUS, el registro 1
+
+bc1t mayor -> es una instrucción de salto condicional que se utiliza en conjunto con instrucciones de comparación de punto flotante como c.le.s (comparación menor o igual en formato de precisión simple)
+
+------CODIGO EJER 2 CAMBIADO A DOBLE PRECISION----------
+--------ORIGINAL:
+.data
+
+Num: .word 4
+vector: .float 5, 4, 3, 7, 6
+
+.text 
+.globl main
+
+main:
+  la $s4, Num
+  la $s5, vector
+  lw $s0, 0($s4)
+  lwc1 $f12, 0($s5)
+  addi $s1, $0, 1
+  addi $s5, $s5, 4
+
+Loop:
+  slt $t1, $s1, $s0
+  beq $t1, $0, fin
+  lwc1 $f0, 0($s5)
+  c.le.s $f0, $f12
+  bc1t mayor
+  mov.s $f12, $f0
+
+mayor:
+  addi $s1, $s1, 1
+  addi $s5, $s5, 4
+  j Loop
+
+fin:
+  swc1 $f12, 0($s5)
+  addi $v0, $0, 2
+  syscall
+  
+  addi $v0, $0, 10
+  syscall
+  
+------CAMBIADO:
+.data
+Num: .word 4
+vector: .double 5.0, 4.0, 3.0, 7.0, 6.0  # Cambiado a punto flotante doble
+
+.text
+.globl main
+
+main:
+  la $s4, Num
+  la $s5, vector
+  lw $s0, 0($s4)
+  ldc1 $f12, 0($s5)  # Cambiado a carga de punto flotante doble
+  addi $s1, $0, 1
+  addi $s5, $s5, 8  # Cambiado el incremento a 8 para apuntar al siguiente double
+
+Loop:
+  slt $t1, $s1, $s0
+  beq $t1, $0, fin
+  ldc1 $f0, 0($s5)  # Cambiado a carga de punto flotante doble
+  c.le.d $f0, $f12  # Cambiado a instrucción de comparación de doble precisión
+  bc1t mayor
+  mov.d $f12, $f0  # Cambiado a movimiento de doble precisión
+
+mayor:
+  addi $s1, $s1, 1
+  addi $s5, $s5, 8  # Cambiado el incremento a 8 para apuntar al siguiente double
+  j Loop
+
+fin:
+  sdc1 $f12, 0($s5)  # Cambiado a almacenamiento de punto flotante doble
+  li $v0, 2
+  syscall
+
+  li $v0, 10
+  syscall
+
+
+-----MODIFICACIONES: 
+8:   vector: .double 5.0, 4.0, 3.0, 7.0, 6.0  # Cambiado a punto flotante doble
+14:  ldc1 $f12, 0($s5)  # Cambiado a carga de punto flotante doble
+15:  addi $s5, $s5, 8  # Cambiado el incremento a 8 para apuntar al siguiente double
+24:  ldc1 $f0, 0($s5)  # Cambiado a carga de punto flotante doble
+25:  c.le.d $f0, $f12  # Cambiado a instrucción de comparación de doble precisión
+26:  mov.d $f12, $f0  # Cambiado a movimiento de doble precisión
+29:  addi $s5, $s5, 8  # Cambiado el incremento a 8 para apuntar al siguiente double
+31:  sdc1 $f12, 0($s5)  # Cambiado a almacenamiento de punto flotante doble
+
+-Historia disc
+-Gym
+-Invitar el 5

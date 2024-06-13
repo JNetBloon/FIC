@@ -1,0 +1,152 @@
+-----OPTIMIZACION DE SOFTWARE-----
+-Intercambio de bucles (NO SIEMPRE)
+
+Depende de las líneas y su tamaño => 16l B -> int(4)/float(4)/double(8) ¿!¿!¿!¿!¿!
+De modo que si es 16l/B con double es a[N][N+2] -> 16/8
+
+
+for(int i=8) <-- intercambiar valor de i y j --> for(int j=10)
+
+-Fusión de arrays
+a[i] y b[i] -> struct v[i].a y v[i].b
+
+-Fusión de bucles (NO SIEMPRE)
+for() y for() -> for()
+
+-Rellenado de arrays (NO SIEMRPE)
+C-> filas
+FORTRAN -> columnas
+
+double m[10][8] -> double m[10][10] para que empieze a guarda en otra linea de cache, esos valores no tienen nada
+
+
+-Partición en bloques (NO SIEMPRE)
+
+float a[10], v[1000];
+for( jj=0; jj<1000; jj+=64) {
+  const int limj = min(jj+64, 10000);
+  for( i=0; i<10; i++)
+    for( j=jj; j<limj; j++)
+      a[i] += i * v[j];
+}
+
+---------CACHEGRIND----------
+______MANUAL_______
+
+valgrind --tool=cachegrind ./ejecutable
+
+*opción -v para ver detalles adicionales
+
+CACHEGRIND SIN COMAS EN LOS MILLARES, CENTENAS ETC
+valgrind --tool=cachegrind ./ejecutable 2>&1 | sed -e ’s/,//g’
+
+
+*La configuración de la cache de datos de primer nivel se controla mediante la opción (sólo se permiten tamaños de lı́nea que sean potencias de 2 iguales o mayores a 16):
+--D1=<tamaño de caché>,<asociatividad>,<tamaño de lı́nea>
+
+¿¿¿"¿¿¿¿¿¿ --D1=4096,1,64
+¿!¿!¿!¿!¿! 1 es correspondencia directa
+
+*La caché de último nivel se controla con la opción
+--LL=<tamaño de caché>,<asociatividad>,<tamaño de lı́nea>
+
+*Cachegrind guarda en fichero un información más detallada a la que se puede acceder mediante el comando cg annotate. Por defecto este fichero se llama 
+
+cachegrind.out.<pid> (donde pid es el identificador del proceso ejecutado), 
+
+*Puedes elegir el nombre que quieras para el fichero con la opción 
+
+--cachegrind-out-file=<fichero>
+
+*Por defecto cg annotate no muestra la información de comportamiento del programa lı́nea a lı́nea; para obtenerla debe invocarse con la opción 
+--auto=yes
+
+*EN CASO DE QUE FALLE EL CACHEGRIND POR ESTAR EN UNA VERSION MÁS NUEVA DE VALGRIND
+valgrind --tool=cachegrind --cache-sim=yes ./tu_programa
+
+
+-->
+
+gcc -g -O3 -o traspuesta traspuesta.c
+valgrind --tool=cachegrind ./traspuesta
+cg_annotate --auto=yes cachegrind.out.13618
+
+_____PARTES DE LA CACHÉ_____
+
+Ir (Referencias de instrucciones): Indica cuántas referencias de instrucciones se han realizado durante la ejecución del programa.
+I1mr (Misses de la caché de instrucciones de nivel 1): Representa la cantidad de misses en la caché de instrucciones de nivel 1 (L1).
+ILmr (Misses de la caché de instrucciones de último nivel): Similar al anterior, pero para la caché de instrucciones de último nivel (LLC).
+Dr (Referencias a datos): Muestra cuántas referencias a datos se realizaron.
+D1mr (Misses de la caché de datos de nivel 1): Número de misses en la caché de datos de nivel 1 (L1).
+DLmr (Misses de la caché de datos de último nivel): Cantidad de misses en la caché de datos de último nivel (LLC).
+Dw (Escrituras a datos): Indica cuántas escrituras a datos se realizaron.
+D1mw (Misses de escritura de la caché de datos de nivel 1): Representa la cantidad de misses de escritura en la caché de datos de nivel 1 (L1).
+DLmw (Misses de escritura de la caché de datos de último nivel): Similar al anterior, pero para la caché de datos de último nivel (LLC).
+
+Ir -> referencias a instrucciones
+I1mr -> miss rate instruciones L1 cache
+ILmr -> miss rate instrucciones LL cache
+Dr -> datos references
+D1mr -> miss rate datos L1 cache
+DLmr -> miss rate datos LL cache
+Dw -> escrituras de datos
+D1mw -> miss rate datos-write L1 cache
+DLmw -> miss rate datos-write LL cache
+
+
+_____EJERCICIOS______
+
+gcc -g -O2 -o traspuesta traspuesta.c
+valgrind --tool=cachegrind --cachegrind-out-file=output --D1=4096,1,64 ./traspuesta
+cg_annotate --auto=yes output
+
+__VUELVE A ENTRAR AQUI EN C__
+-Intercambio de bucles (NO SIEMPRE)
+
+Depende de las líneas y su tamaño => 16l B -> int(4)/float(4)/double(8) ¿!¿!¿!¿!¿!
+De modo que si es 16l/B con double es a[N][N+2] -> 16/8
+
+
+for(int i=8) <-- intercambiar valor de i y j --> for(int j=10)
+
+-Fusión de arrays
+a[i] y b[i] -> struct v[i].a y v[i].b
+
+-Fusión de bucles (NO SIEMPRE)
+for() y for() -> for()
+
+-Rellenado de arrays (NO SIEMRPE)
+C-> filas
+FORTRAN -> columnas
+
+double m[10][8] -> double m[10][10] para que empieze a guarda en otra linea de cache, esos valores no tienen nada
+
+
+-Partición en bloques (Tiling) -> (NO SIEMPRE)
+
+float a[10], v[1000];
+for( jj=0; jj<1000; jj+=64) {
+  const int limj = min(jj+64, 10000);
+  for( i=0; i<10; i++)
+    for( j=jj; j<limj; j++)
+      a[i] += i * v[j];
+}
+
+-Distribución de datos en estructuras
+Básicamente cambiar el orden de un struct dependiendo de la frecuencia de uso en el programa, estando más arriba los más usados
+_____________________________
+
+
+*SI TIENES QUE EJECUTAR GCC CON macro NUM REPS. 
+Ejemplo: gcc -g -O2 -DN=100 -DNUM REPS=1 miejemplo.c.
+
+*En triples bucles lo mas optimo es a[i][j][k] (Vamos, que es for(i) dentro con for(j) dentro con for(k) 
+
+*En este caso no vale el intercambio de bucles porque pierdes localidad de escritura en b
+for( i = 0 ; i < 1000; i++) {
+	for( j = 0; j < 1000; j++) {
+		b[i][j] = a[j][i];
+	}
+}
+
+

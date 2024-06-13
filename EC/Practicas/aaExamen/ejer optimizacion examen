@@ -1,0 +1,38 @@
+.data
+n: .word 16
+a: .float 1, 2
+ax: .space 58
+f: .float 1, 1
+fx: .space 58
+
+.text
+.globl main
+
+main:
+  la $t0, n
+  lw $t0, 0($t0)
+  la $t1, ax
+  lwc1 $f2, -8($t1) 
+  lwc1 $f3, -4($t1)
+  la $t4, fx
+  lwc1 $f5, -8($t4)
+  lwc1 $f6, -4($t4)
+  addi $t0, $t0, -2
+loop:
+  add.s $f3, $f3, $f2
+  add.s $f7, $f6, $f5
+
+  swc1 $f3, 0($t1)
+  mov.s $f5, $f6
+  swc1 $f7, 0($t4)
+
+  addi $t0, $t0, -1
+  addi $t1, $t1, 4
+  addi $t4, $t4, 4
+
+  bne $t0, $0, loop
+  mov.s $f6, $f7
+
+end:
+  addi $v0, $0, 10
+  syscall

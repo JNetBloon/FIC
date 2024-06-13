@@ -1,0 +1,16 @@
+()
+( country3 numVotes 0)
+( country1 numVotes 0 country3 numVotes 0)
+( country1 numVotes 0 country3 numVotes 0 country5 numVotes 0)
+( country1 numVotes 0 country2 numVotes 0 country3 numVotes 0 country5 numVotes 0)
+( country1 numVotes 0 country2 numVotes 0 country3 numVotes 0 country4 numVotes 0 country5 numVotes 0)
+country33 Not found
+country3
+country3
+( country1 numVotes 0 country2 numVotes 0 country3 numVotes 2 country4 numVotes 0 country5 numVotes 0)
+( country1 numVotes 0 country3 numVotes 2 country4 numVotes 0 country5 numVotes 0)
+( country1 numVotes 0 country3 numVotes 2 country5 numVotes 0)
+( country3 numVotes 2 country5 numVotes 0)
+( country3 numVotes 2)
+()
+( country4 numVotes 0)

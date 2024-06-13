@@ -1,0 +1,8 @@
+01 C Jury1 10
+02 S
+03 C Jury2 10
+04 S
+05 C Jury3 10
+06 S
+07 C Jury4 10
+08 S

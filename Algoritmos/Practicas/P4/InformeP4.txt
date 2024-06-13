@@ -1,0 +1,54 @@
+INFORME P4
+
+-------
+EQUIPO:
+-------
+	ANONIMO
+--------------------------------------------------------
+ESPECIFICACIONES DEL EQUIPO DONDE SE REALIZÓ LA PRÁCTICA
+--------------------------------------------------------
+	VER NOTAS
+--------------------------
+INTRODUCCIÓN A LA PRÁCTICA
+--------------------------
+	
+	Fue realizada en el lenguaje de programación C. Esta consistía en acabar de desarrollar la función proporcionada por el profesorado "dijkstra" (algoritmo que calcula la matriz de distancias mínimas de un grafo) y de estudiar su complejidad.
+
+Para este estudio utilizamos una función proporcionada por el profesorado que obtiene el tiempo en un momento determinado (En microsegundos) para luego compararlo con otro al acabar la ejecución del algoritmo a probar.
+
+	Uno de los principales problemas eran los tiempos bajos, ya que tienden a ser más inexactos. Para ello usamos una condición que comprueba si t(n) es menor a 500 para repetir su medición con un valor K (Múltiplo de 10) = 1000. Explicados los fundamentos de la práctica, véase los tiempos obtenidos en el proceso.
+	
+-------
+TIEMPOS
+-------
+
+	!- Es importante recalcar que las filas de las tablas de tiempos que cuentan con  “(*)” son las que cumplieron la condición explicada anteriormente (t(n) < 500) y las señaladas con “#” son las que cuentan con anomalías.Para evitarlas, repetimos los tiempos en numerosas ocasiones, escogiendo aquellas tablas que proporcionaban datos más exactos. Sin embargo, acabaron apareciendo una serie de ellas, las cuales comentaremos mas adelante.
+	
+	A continuación, los tiempos de ejecucion de la función "dijkstra":
+	
+	
+	Tiempo de inicializacion y ordenacion
+         n             t(n)     t(n)/n^2.5     t(n)/n^2.775   t(n)/n^3
+(*)      9           8.5460     0.03516872     0.01921940     0.01172291
+(*)     18          62.2850     0.04531085     0.02046455 #   0.01067987
+(*)     37         450.8700     0.05414359     0.02005818 #   0.00890115
+        75        2905.0000     0.05963387     0.01819077     0.00688593
+       125       11763.0000     0.06733534     0.01784813     0.00602266
+       250       81691.0000     0.08266548     0.01810884     0.00522822
+       500      559206.0000     0.10003381     0.01811048     0.00447365
+      1000     4014529.0000     0.12695055     0.01899479     0.00401453
+			       (Subestimada)   (Estimada)    (Sobrestimada)
+
+Cota subestimada -> n^2.5   -> Tiende a infinito
+Cota estimada 	 -> n^2.775 -> Tiende a 0.018
+Cota sobrstimada -> n^3     -> Tiende a 0
+
+En esta medición de tiempos podemos observar que aparecen dos anomaliás, ambas de mediciones que entraron en la condición (t(n) < 500). Estas nos dan tiempos un poco mas altos de lo esperado, pero tampoco demasiado. Aun así, podemos ver que la cota estimada elegida nos da tiempos que tienden a una cosntante indicada (0.018).
+Dentro del estudio de este algoritmo, se nos pedía estudiar la complejidad propia del logaritmo O(n³), pero como podemos ver, en este estudio nos da tiempos decrecientes que no se puden tomar como validos, es por eso que la tomamos como cota sobreestimada. Esto puede deberse a que en este estudio se trabajan grafos con peso de aristas máximo definido (1000), lo que aumenta la probabilidad de repetición de un mismo número que facilita el calculo del algoritmo.
+
+----------
+CONCLUSIÓN
+----------
+
+En resumen, la práctica consistió en implementar y analizar el algoritmo de Dijkstra en C, utilizando un equipo con especificaciones detalladas y ejecutando el código en un entorno Ubuntu. Se midieron los tiempos de ejecución para diferentes tamaños de entrada, con especial atención a aquellos con tiempos bajos. Aunque se observaron algunas anomalías en los tiempos, el análisis de complejidad indicó que el algoritmo tiende a tener una complejidad cuasi cuadrática (n^2.775), en línea con las expectativas teóricas, mientras que la cota sobreestimada (n^3) no resultó válida debido a tiempos decrecientes posiblemente influenciados por la tener un peso de arista maximo fijado en el programa.
+

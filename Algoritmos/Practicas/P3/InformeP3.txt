@@ -1,0 +1,185 @@
+INFORME P3
+
+-------
+EQUIPO:
+-------
+	ANONIMO
+--------------------------------------------------------
+ESPECIFICACIONES DEL EQUIPO DONDE SE REALIZÓ LA PRÁCTICA
+--------------------------------------------------------
+	VER NOTAS
+--------------------------
+INTRODUCCIÓN A LA PRÁCTICA
+--------------------------
+	
+	Fue realizada en el lenguaje de programación C. El objetivo es comprobar la complejidad del arlgoritmo de ordenación por montículo mínimo, es decir, donde el nodo padre es siempre menor a sus 		 			hijos. Para ello, el algoritmo tuvo que ordenar vectores iniciados de tres maneras distintas: aleatoria, ascendente y descendente. Cada una de estas tres inicializaciones mostro unos resultados distintos que estudiaremos mas adelante.
+	Para este estudio utilizamos una función proporcionada por el profesorado que obtiene el tiempo en un momento determinado (En microsegundos) para luego compararlo con otro al acabar la ejecución del algoritmo a probar.
+	Uno de los principales problemas eran los tiempos bajos, ya que tienden a ser más inexactos. Para ello usamos una condición que comprueba si t(n) es menor a 500 para repetir su medición con un 			valor K (Múltiplo de 10) = 1000. Explicados los fundamentos de la práctica, véase los tiempos obtenidos en el proceso.
+
+-------
+TIEMPOS
+-------
+
+	!- Es importante recalcar que las filas de las tablas de tiempos que cuentan con  “(*)” son las que cumplieron la condición explicada anteriormente (t(n) < 500) y las señaladas con “¡AN!” son 	las que cuentan con anomalías. Además para las 3 situaciones del algoritmo, se obtiene una cota subestimada, estimada y sobrestimada. Para evitar las anomalías repetimos los tiempos en numerosas ocasiones, escogiendo aquellas tablas que proporcionaban datos más exactos. Sin embargo, acabaron apareciendo una serie de anomalías, las cuales comentaremos en cada tabla.
+	
+	Adentrandonos en el tema de la complejidad, este algoritmo presenta un complejidad de O(n log(n)) en todos sus casos. Es decir, tanto para la inicialización aleatoria, como para la ascendente y la descendente, la complejidad es de 0(n(log(n)). Esto se debe a que es este algoritmo, la operación principal, la extracción de mínimo, toma O(log n) tiempo y se realiza n veces, mientras que contrucción del montículo toma 0(n) tiempo (como veremos mas adelante). 
+	
+	A continuación, los tiempos de creación de monticulos:
+	
+------------------------------------------------------
+Tiempo creacion montículo con inicialización aleatoria
+------------------------------------------------------
+     	n     	t(n)   t(n)/n^0.80   t(n)/n^1.00   t(n)/n^1.20
+(*)	500   	7.5940   0.052637419   0.015188000   0.004382345
+(*)   1000  	14.9470   0.059505079   0.014947000   0.003754517
+(*)   2000  	29.7160   0.067946385   0.014858000   0.003249035
+(*)   4000  	59.9000   0.078664508   0.014975000   0.002850722
+(*)   8000 	119.5460   0.090170206   0.014943250   0.002476436
+(*)  16000 	238.8610   0.103478294   0.014928812   0.002153780
+(*)  32000 	469.2850   0.116766077   0.014665156   0.001841860
+ 	64000 	940.0000   0.134333359   0.014687500   0.001605876
+	128000	1901.0000   0.156032167   0.014851563   0.001413612
+	256000	3742.0000   0.176405374   0.014617187   0.001211200
+
+Cota subestimada  --> n^0.8 -- Tiende a infinito
+Cota estimada     --> n^1 -- Tiende a 0.014
+Cota sobrestimada --> n^1.2-- Tiende a 0
+
+
+-------------------------------------------------------
+Tiempo creacion montículo con inicialización ascendente
+-------------------------------------------------------
+     	n     	t(n)   t(n)/n^0.80   t(n)/n^1.00   t(n)/n^1.20
+(*)	500   	2.4840   0.017217718   0.004968000   0.001433467
+(*)   1000   	4.7670   0.018977769   0.004767000   0.001197416
+(*)   2000   	9.4110   0.021518489   0.004705500   0.001028963
+(*)   4000  	18.4310   0.024204767   0.004607750   0.000877156
+(*)   8000  	40.1060   0.030250835   0.005013250   0.000830809
+(*)  16000  	74.2150   0.032151090   0.004638438   0.000669187
+(*)  32000 	148.2520   0.036887615   0.004632875   0.000581863
+(*)  64000 	289.4570   0.041365671   0.004522766   0.000494502
+	128000 	571.0000   0.046867106   0.004460937   0.000424604
+	256000	1173.0000   0.055297569   0.004582031   0.000379673
+
+Cota subestimada  --> n^0.8 -- Tiende a infinito
+Cota estimada     --> n^1 -- Tiende a 0.046
+Cota sobrestimada --> n^1.2-- Tiende a 0
+
+---------------------------------------------------------
+Tiempo creacion montículo con inicialización descendente
+---------------------------------------------------------
+     	n     	t(n)   t(n)/n^0.80   t(n)/n^1.00   t(n)/n^1.20
+(*)	500   	4.9030   0.033984892   0.009806000   0.002829423
+(*)   1000  	10.1630   0.040459632   0.010163000   0.002552830
+(*)   2000  	21.8280   0.049910273   0.010914000   0.002386591
+(*)   4000  	41.2470   0.054168196   0.010311750   0.001963000
+(*)   8000  	79.9300   0.060288964   0.009991250   0.001655777
+(*)  16000 	165.5790   0.071731394   0.010348688   0.001493005
+(*)  32000 	329.1600   0.081900598   0.010286250   0.001291895
+ 	64000 	681.0000   0.097320231   0.010640625   0.001163406
+	128000	1307.0000   0.107277245   0.010210937   0.000971905
+	256000	2665.0000   0.125633437   0.010410156   0.000862600
+
+Cota subestimada  --> n^0.8 -- Tiende a infinito
+Cota estimada     --> n^1 -- Tiende a 0.010
+Cota sobrestimada --> n^1.2-- Tiende a 0
+
+   
+   Las tablas proporcionan datos sobre el tiempo de creación de un montículo a partir de un vector con diferentes tamaños (n) e inicializaciones (aleatoria, ascendente, descendente). La penúltima columna muestra el cociente t(n)/n¹. Para demostrar empíricamente que crear un montículo tiene un tiempo de ejecución lineal O(n), debemos observar cómo se comporta este cociente a medida que n aumenta.
+    
+Observemos las columnas t(n)/n¹:
+
+    A medida que n se duplica, el tiempo no varía significativamente.
+    Los valores del tiempo son relativamente constantes y no aumentan de manera drástica a medida que n aumenta.
+    
+Estos patrones nos sugieren que el tiempo de ejecución es proporcional a n.
+
+Con todo, podemos asegurar que el tiempo de creación de un montículo a partir de un vector es lineal en términos de n, respaldando la afirmación de que el algoritmo tiene una complejidad de tiempo O(n)
+
+
+	A continuación, las tablas de tiempos de ordenación:
+
+    
+------------------------------------------------------
+Ordenacion por monticulos con inicializacion aleatoria
+------------------------------------------------------
+
+       n         t(n)     t(n)/n^0.90   t(n)/n^1.10   t(n)/n^1.40
+(*)    500      40.4860   0.150741165   0.043494853   0.006741350
+(*)   1000      87.8010   0.175186027   0.044004740   0.005539869
+(*)   2000     191.8030   0.205082404   0.044845865   0.004585782
+(*)   4000     416.8060   0.238825101   0.045464034   0.003776156
+      8000     826.0000   0.253629087   0.042032097   0.002835659
+     16000    1825.0000   0.300299690   0.043324234   0.002374078
+     32000    3999.0000   0.352627699   0.044288037   0.001971249
+     64000    8636.0000   0.408085024   0.044618469   0.001613098
+    128000   18274.0000   0.462748104   0.044045613   0.001293420
+    256000   39174.0000   0.531596301   0.044048787   0.001050659
+  			
+ 
+	
+Cota subestimada  --> n^0.9 -- Tiende a infinito
+Cota estimada     --> n^1.1 -- Tiende a 0.044
+Cota sobrestimada --> n^1.4 -- Tiende a 0
+
+Como podemos observar, no se presentan niguna anomalia y los tiempos acaban estabilizandose e.
+
+
+-------------------------------------------------------
+Ordenacion por monticulos con inicializacion ascendente
+-------------------------------------------------------
+
+       n         t(n)     t(n)/n^0.80   t(n)/n^1.05   t(n)/n^1.20	
+(*)    500      21.8280   0.151299656   0.031017057   0.012596501	¡AN!
+(*)   1000      57.9450   0.230683200   0.039629260   0.014555126	¡AN!
+(*)   2000     145.2040   0.332012614   0.047796042   0.015876055	¡AN!
+(*)   4000     321.8080   0.422618830   0.050982784   0.015315277	¡AN!
+      8000     759.0000   0.572492480   0.057873779   0.015722941
+     16000    1543.0000   0.668451558   0.056626451   0.013913037
+     32000    3169.0000   0.788501015   0.055974344   0.012437763
+     64000    6583.0000   0.940762237   0.055963386   0.011246254
+    128000   13737.0000   1.127519139   0.056206350   0.010215037
+    256000   28609.0000   1.348685553   0.056339049   0.00926008
+	
+
+Cota subestimada  --> n^0.8   -- Tiende a infinito
+Cota estimada     --> n^1.055 -- Tiende a 0.056
+Cota sobrestimada --> n^1.2   -- Tiende a 0
+
+Las anomalías marcadas afectan a la columna de cota estimada y sobrestimada. Todas ellas tienen en común que entran en la condición t(n) < 500, y la medicion de tiempos se tiene que volver a realizar, por lo que acaban saliendo valores mas inexactos. Sin embargo, podemos ver que al final los tiempos acaban estabilizandose con un valor medio de 0.056.
+
+--------------------------------------------------------
+Ordenacion por monticulos con inicializacion descendente
+--------------------------------------------------------
+
+      n          t(n)     t(n)/n^0.90   t(n)/n^1.05   t(n)/n^1.20
+(*)    500      19.5770   0.072890871   0.028696414   0.011297494	¡AN!
+(*)   1000      54.6510   0.109043081   0.038689945   0.013727711	¡AN!
+(*)   2000     131.9140   0.141047013   0.045103412   0.014422976	¡AN!
+(*)   4000     290.1120   0.166230879   0.047907411   0.013806821	¡AN!
+      8000     675.0000   0.207263479   0.053834327   0.013982853
+     16000    1333.0000   0.219342185   0.051345710   0.012019494
+     32000    2802.0000   0.247077473   0.052126751   0.010997353
+     64000    5919.0000   0.279696070   0.053181351   0.010111891
+    128000   12432.0000   0.314812544   0.053947402   0.009244619
+    256000   25479.0000   0.345753361   0.053398667   0.008246970
+    
+    
+Cota subestimada  --> n^0.9   -- Tiende a infinito
+Cota estimada     --> n^1.0.5 -- Tiende a 0.053
+Cota sobrestimada --> n^1.2   -- Tiende a 0
+
+Las anomalías marcadas afectan a la columna de cota estimada y sobrestimada. Todas ellas tienen en común que entran en la condición t(n) < 500, y la medicion de tiempos se tiene que volver a realizar, por lo que acaban saliendo valores mas inexactos. Sin embargo, podemos ver que al final los tiempos acaban estabilizandose con un valor medio de 0.053.	
+
+----------
+CONCLUSIÓN
+----------
+	
+	En esta práctica, se evaluó la complejidad del algoritmo de ordenación por montículo mínimo en diferentes contextos de inicialización de vectores. Los resultados confirman que la creación de montículos tiene una complejidad lineal O(n), respaldando la complejidad teórica del algoritmo O(nlog(⁡n)).
+
+Pese a que el algoritmo se lograba estabilizar en unos tiempos constantes con cotas cercanas a n^1, la cota estudiada en clase: nlog(n), demostró ser más inestable a la que estudiamos en este informe, por lo cual, decidimos no incluirla en el estudio.
+
+Con esto, podemos decir que la ordenación por montículos es más eficiente cuando el vector se haya ordenado de manera ascendente, y tarda más tiempo cuando este vector es aleatorio, dando una diferencia de tiempos hasta 4 veces más grandes entre el mejor y el peor de los casos.	
+
+
+

@@ -1,0 +1,4 @@
+C:/Users/usuario/Desktop/udc/1_PRO II/Practica 1/CLion/Plantilla-Template_P1/P1/cmake-build-debug/CMakeFiles/main.dir
+C:/Users/usuario/Desktop/udc/1_PRO II/Practica 1/CLion/Plantilla-Template_P1/P1/cmake-build-debug/CMakeFiles/test_lists.dir
+C:/Users/usuario/Desktop/udc/1_PRO II/Practica 1/CLion/Plantilla-Template_P1/P1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/usuario/Desktop/udc/1_PRO II/Practica 1/CLion/Plantilla-Template_P1/P1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

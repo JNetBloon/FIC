@@ -1,0 +1,11 @@
+# ninja log v5
+20	152	6993710457786312	CMakeFiles/main.dir/static_list.c.obj	a318750d00dd66c6
+1	153	6993710457802765	CMakeFiles/main.dir/main.c.obj	866157b29194fcb5
+153	257	6993710458815269	../bin/main.exe	aaff9a63e4d87284
+2	66	6993711417166450	CMakeFiles/main.dir/static_list.c.obj	a318750d00dd66c6
+67	149	6993711417944811	../bin/main.exe	aaff9a63e4d87284
+2	74	6993711484918177	CMakeFiles/main.dir/static_list.c.obj	a318750d00dd66c6
+75	178	6993711485868871	../bin/main.exe	aaff9a63e4d87284
+5	80	6993711758079681	CMakeFiles/test_lists.dir/static_list.c.obj	9880455f6c8fae2b
+1	95	6993711758241254	CMakeFiles/test_lists.dir/test.c.obj	161963244db5c6c8
+95	166	6993711758924555	../bin/test_lists.exe	1e8eae6e180b16b5

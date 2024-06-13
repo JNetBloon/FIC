@@ -1,0 +1,70 @@
+********************
+01 C:jury Jury1 totalvoters 10
+* Create: jury Jury1 totalvoters 10
+********************
+02 S:
+Jury Jury1
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+********************
+03 C:jury Jury2 totalvoters 10
+* Create: jury Jury2 totalvoters 10
+********************
+04 S:
+Jury Jury1
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury2
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+********************
+05 C:jury Jury3 totalvoters 10
+* Create: jury Jury3 totalvoters 10
+********************
+06 S:
+Jury Jury1
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury2
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury3
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+********************
+07 C:jury Jury4 totalvoters 10
+* Create: jury Jury4 totalvoters 10
+********************
+08 S:
+Jury Jury1
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury2
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury3
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury4
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+

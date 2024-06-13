@@ -1,0 +1,137 @@
+---INFORME P2---
+
+->Equipo:
+	ANONIMO
+
+->Especificaciones del equipo donde se realizó la prueba
+	VER NOTAS
+
+->INTRODUCCIÓN A LA PRÁCTICA
+	
+	Fue realizada en el lenguaje de programación C. El objetivo es comprobar la complejidad de 2 algoritmos de ordenación, uno por inserción y otro por shell de un vector de números, ordenándolos de menor a mayor.
+	Para ello usamos una función proporcionada por el profesorado que obtiene el tiempo en un momento determinado (En microsegundos) para luego compararlo con otro al acabar la ejecución del algoritmo a probar.
+Uno de los principales problemas eran los tiempos bajos, ya que tienden a ser más inexactos. Para ello usamos una condición que comprueba si t(n) es menor a 500 para repetir su medición con un valor K (Múltiplo de 10) = 1000. Explicados los fundamentos de la práctica, véase los tiempos obtenidos en el proceso.
+
+->TIEMPOS
+
+	!- Es importante recalcar que las filas de las tablas de tiempos que cuentan con  “(*)” son las que cumplieron la condición explicada anteriormente (t(n) < 500) y las señaladas con “¡AN!” son las que cuentan con anomalías. Además para las 3 situaciones de cada algoritmo, se obtiene una cota subestimada, estimada y sobrestimada. Para evitar las anomalías repetimos los tiempos en numerosas ocasiones, escogiendo aquellas tablas que proporcionaban datos más exactos. Sin embargo, acabaron apareciendo una serie de anomalías, las cuales se deben, en su mayoría, a tiempos más elevados de lo esperado (Todos los casos están indicados). 
+
+	Dentro del tema de la complejidad, en el mejor de los casos (ordenado de manera ascendente), la complejidad del algoritmo de Ordenación por Inserción tiene una complejidad de O(n), mientras que el de Ordenación por Shell, tiene una complejidad de O(n log(n)). Sin embargo, para el peor de los casos (ordenado de manera descendente), el algoritmo de ordenación por Shell tiene una complejidad menor, de tipo O(n(log(n))^2), mientras que el algoritmo de Ordenación por Inserción tiene una complejidad de O(n^2),
+En el caso intermedio ocurre lo mismo que en el peor posible, la complejidad del algoritmo de Ordenación por Shell es más óptima que el de Inserción.
+
+--Ordenacion por Insercion---
+
+Ordenacion por insercion con inicializacion aleatoria
+
+  	n     	t(n)		t(n)/n^1.8   	t(n)/n^2.0   	t(n)/n^2.2
+(*)	500   	92.702		0.001285 	0.000371 	0.000107
+¡AN!   	1000  	579.000 	0.002305 	0.000579 	0.000145 
+   	2000 	1275.000 	0.001458 	0.000319 	0.000070
+   	4000 	4895.000 	0.001607 	0.000306 	0.000058
+   	8000	21106.000 	0.001990 	0.000330 	0.000055
+  	16000	86370.000 	0.002339 	0.000337 	0.000049
+  	32000   343731.000 	0.002673 	0.000336 	0.000042
+  	64000   1396491.000 	0.003118 	0.000341 	0.000037
+ 	128000  5594080.000 	0.003587 	0.000341 	0.000032
+				[Subestimada]	[Estimada]	[Sobreestimada]	
+				
+Cota subestimada -> n^1.8  -> Tiende a infinito
+Cota estimada      -> n^2.0   -> Tiende a 0.00033
+Cota sobrestimada -> n^2.2   -> Tiende a 0
+
+Ordenacion por insercion con inicializacion ascendente
+  	n     	t(n)		t(n)/n^0.6   	t(n)/n^1.0   	t(n)/n^1.4
+(*)	500    	1.155 		0.027746 	0.002310 	0.000192
+(*)   1000    	2.087 		0.033077 	0.002087 	0.000132
+(*)   2000    	3.752 		0.039232 	0.001876 	0.000090
+(*)   4000    	7.682 		0.052995 	0.001921 	0.000070
+(*)   8000   	14.949 		0.068039 	0.001869 	0.000051
+(*)  16000   	30.214 		0.090727 	0.001888 	0.000039
+(*)  32000   	55.545 		0.110041 	0.001736 	0.000027
+(*)  64000  	122.946 	0.160697 	0.001921 	0.000023
+(*) 128000  	242.434 	0.209058 	0.001894 	0.000017
+				[Subestimada]	[Estimada]	[Sobreestimada]
+
+Cota subestimada -> n^0.6   -> Tiende a infinito
+Cota estimada      -> n^1.0    -> Tiende a 0.0018
+Cota sobrestimada -> n^1.4    -> Tiende a 0
+
+Ordenacion por insercion con inicializacion descendente
+  	n     	t(n)		t(n)/n^1.8   	t(n)/n^2.0   	t(n)/n^2.2
+(*)	500  	182.379 	0.002528 	0.000730 	0.000210
+¡AN!  	1000  	931.000 	0.003706 	0.000931 	0.000234
+ 	2000 	2710.000 	0.003098 	0.000678 	0.000148
+   	4000	11296.000 	0.003709 	0.000706 	0.000134
+   	8000	45386.000 	0.004279 	0.000709 	0.000118
+  	16000   181333.000 	0.004910 	0.000708 	0.000102
+  	32000   723257.000 	0.005624 	0.000706 	0.000089
+  	64000   2875980.000 	0.006422 	0.000702 	0.000077
+ 	128000  11465231.000 	0.007352 	0.000700 	0.000067
+				[Subestimada]	[Estimada]	[Sobreestimada]
+				
+Cota subestimada -> n^1.8   -> Tiende a infinito
+Cota estimada      -> n^2       -> Tiende a 0.00070
+Cota sobrestimada -> n^2.2    -> Tiende a 0
+
+---Ordenacion por Shell---
+
+Ordenacion por shell con inicializacion aleatoria
+  	n     	t(n)		t(n)/n^1.0   	t(n)/n^1.2 	t(n)/n^1.4
+(*)	500   	45.166 		0.090332 	0.030445 	0.007521
+(*)  	1000  	105.648 	0.105648 	0.031540 	0.006666
+(*) 	2000  	247.978 	0.123989 	0.032787 	0.005929
+   	4000 	553.574 	0.138394 	0.032416 	0.005015
+   	8000 	1175.000 	0.146875 	0.030472 	0.004034
+  	16000 	2689.000 	0.168063 	0.030885 	0.003498
+	32000 	6850.000 	0.214062 	0.034845 	0.003377
+  	64000	15426.000 	0.241031 	0.033753 	0.002881
+ 	128000	33075.000 	0.258398 	0.033001 	0.002341
+				[Subestimada]	[Estimada]	[Sobreestimada]
+				
+Cota subestimada -> n^1.0   -> Tiende a infinito
+Cota estimada      -> n^1.2 -> Tiende a 0.033
+Cota sobrestimada -> n^1.4	-> Tiende a 0
+
+Ordenacion por shell con inicializacion ascendente 
+  	n     	t(n)		t(n)/n^0.9 	t(n)/n^1.1   	t(n)/n^1.3
+(*)	500    	8.439 		0.031421 	0.009066 	0.002616
+(*)   	1000   	18.486 		0.036884 	0.009265 	0.002327
+(*)	2000   	40.392 		0.043189 	0.009444 	0.002065
+(*)  	4000   	90.541 		0.051879 	0.009876 	0.001880
+(*)  	8000  	197.539 	0.060656 	0.010052 	0.001666
+(*) 	16000  	433.331 	0.071304 	0.010287 	0.001484
+  	32000  	887.000 	0.078215 	0.009823 	0.001234
+  	64000 	1910.000 	0.090255 	0.009868 	0.001079
+ 	128000 	4099.000 	0.103798 	0.009880 	0.000940
+				[Subestimada]	[Estimada]	[Sobreestimada]
+				
+Cota subestimada -> n^0.9   -> Tiende a infinito
+Cota estimada      -> n^1.1 -> Tiende a 0.0098
+Cota sobrestimada -> n^1.3 	-> Tiende a 0
+
+Ordenacion por shell con inicializacion descendente
+  	n     	t(n)		t(n)/n^0.9   	t(n)/n^1.1   	t(n)/n^1.3
+(*)¡AN!	500   	12.874 		0.047934 	0.013831 	0.003991
+(*)   	1000   	31.277 		0.062406 	0.015676 	0.003938
+(*)   	2000   	72.942 		0.077992 	0.017055 	0.003729
+(*)   	4000  	163.658 	0.093774 	0.017851 	0.003398
+(*)   	8000  	349.376 	0.107278 	0.017778 	0.002946
+  	16000  	702.000 	0.115513 	0.016665 	0.002404
+  	32000 	1477.000 	0.130240 	0.016357 	0.002054
+  	64000 	3071.000 	0.145117 	0.015867 	0.001735
+ 	128000 	6528.000 	0.165307 	0.015734 	0.001498
+				[Subestimada]	[Estimada]	[Sobreestimada]
+				
+Cota subestimada -> n^0.9   -> Tiende a infinito
+Cota estimada      -> n^1.1 -> Tiende a 0.016
+Cota sobrestimada -> n^1.3 	-> Tiende a 0
+
+->CONCLUSIÓN
+
+	En general, después de este estudio, podemos afirmar que el algoritmo de ordenación por Shell es más eficiente que el algoritmo de Ordenación por Inserción en aquellos casos en los que el vector esté generado de forma aleatoria o de manera descendente. Esto se debe al orden logarítmico del algoritmo de ordenación por Shell, O(n log^2(n)), superando en eficiencia al orden cuadrático de Inserción, O(n^2).
+	
+	Sin embargo, cuando el vector ya está ordenado de forma ascendente (En el mejor de los casos), el algoritmo de Ordenación por Inserción obtiene mejores tiempos que el de Ordenación por Shell. Esto se debe de nuevo a un mayor rendimiento por el Orden del algoritmo de Inserción, uno lineal (O(n)), más eficiente frente al algoritmo logarítmico de Ordenación por Shell, O(n log^2(n)). Cabe recalcar que a la hora de elegir qué algoritmo usar primeramente se debe tener en cuenta el tamaño del vector y las especificaciones del sistema.
+
+
+
+

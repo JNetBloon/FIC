@@ -1,0 +1,16 @@
+---EJER 1 CUESTIONARIO P5---
+1-Una matriz de 128x128 elementos de 4 bytes cada uno tiene que ser accedida por columnas en un programa escrito en C. Si la caché es de correspondencia directa, y tiene 8 KBytes y líneas de 64 bytes, el acceso a la matriz va a parar a la misma línea de la caché cada X accesos o filas. Habrá reemplazo sistemático en caché a partir de la iteración Y.
+
+Cada fila ocupa 128 * 4 = 512 bytes = 2^9. Como se salta una fila entre cada dos accesos, y la caché tiene 8192 bytes, tenemos un conflicto cada 8192 (2^13) / 512 (2^9) = 16 accesos. 
+Como la caché es de correspondencia directa, a partir de la iteración 16 se reemplazarán las líneas de caché que han sido utilizadas.
+
+X = 16
+Y = 16
+
+2-Una matriz de 64x64 elementos de 8 bytes cada uno tiene que ser accedida por columnas en un programa escrito en C. Si la caché tiene asociatividad 2, un tamaño total de 4 KBytes y líneas de 64 bytes, el acceso a la matriz va a parar al mismo conjunto de la caché cada X  accesos o filas. Habrá reemplazo sistemático en caché a partir de la iteración Y.
+
+Cada fila ocupa 64 * 8 = 512 bytes. Como se salta una fila entre cada dos accesos, y la caché tiene 4096 bytes y asociatividad 2, tenemos un acceso en el mismo conjunto cada (4096 / 2) / 512 = 4 accesos
+Cada 4 accesos se repite el conjunto caché. Como cada conjunto tiene 2 vías, son necesarias 8 iteraciones del bucle para que haya que reemplazar líneas en la caché. 
+
+X = 4
+Y = 8

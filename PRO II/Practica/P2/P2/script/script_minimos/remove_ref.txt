@@ -1,0 +1,136 @@
+********************
+01 C: jury Jury1 totalvoters 10
+* Create: jury Jury1 totalvoters 10
+********************
+02 S:
+Jury Jury1
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+********************
+03 C: jury Jury2 totalvoters 10
+* Create: jury Jury2 totalvoters 10
+********************
+04 S:
+Jury Jury1
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury2
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+********************
+05 C: jury Jury3 totalvoters 10
+* Create: jury Jury3 totalvoters 10
+********************
+06 S:
+Jury Jury1
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury2
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury3
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+********************
+07 N: jury Jury1 participant Country1 location eu
+* New: jury Jury1 participant Country1 location eu
+********************
+08 S:
+Jury Jury1
+Participant Country1 location eu numvotes 0 (0.00%)
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury2
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury3
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+********************
+09 N: jury Jury2 participant Country1 location eu
+* New: jury Jury2 participant Country1 location eu
+********************
+10 S:
+Jury Jury1
+Participant Country1 location eu numvotes 0 (0.00%)
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury2
+Participant Country1 location eu numvotes 0 (0.00%)
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury3
+No participants
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+********************
+11 N: jury Jury3 participant Country1 location eu
+* New: jury Jury3 participant Country1 location eu
+********************
+12 S:
+Jury Jury1
+Participant Country1 location eu numvotes 0 (0.00%)
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury2
+Participant Country1 location eu numvotes 0 (0.00%)
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury3
+Participant Country1 location eu numvotes 0 (0.00%)
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+********************
+13 V: jury Jury3 participant Country1
+* Vote: jury Jury3 participant Country1 location eu numvotes 1
+********************
+14 S:
+Jury Jury1
+Participant Country1 location eu numvotes 0 (0.00%)
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury2
+Participant Country1 location eu numvotes 0 (0.00%)
+Nullvotes 0
+Participation: 0 votes from 10 voters (0.00%)
+
+Jury Jury3
+Participant Country1 location eu numvotes 1 (100.00%)
+Nullvotes 0
+Participation: 1 votes from 10 voters (10.00%)
+
+********************
+15 R:
+* Remove: jury Jury1
+* Remove: jury Jury2
+********************
+16 S:
+Jury Jury3
+Participant Country1 location eu numvotes 1 (100.00%)
+Nullvotes 0
+Participation: 1 votes from 10 voters (10.00%)
+

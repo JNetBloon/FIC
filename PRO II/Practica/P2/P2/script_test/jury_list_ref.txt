@@ -1,0 +1,16 @@
+()
+( jury3 totalVoters 10)
+( jury1 totalVoters 10 jury3 totalVoters 10)
+( jury1 totalVoters 10 jury3 totalVoters 10 jury5 totalVoters 10)
+( jury1 totalVoters 10 jury2 totalVoters 10 jury3 totalVoters 10 jury5 totalVoters 10)
+( jury1 totalVoters 10 jury2 totalVoters 10 jury3 totalVoters 10 jury4 totalVoters 10 jury5 totalVoters 10)
+jury33 Not found
+jury3
+jury3
+( jury1 totalVoters 10 jury2 totalVoters 10 jury3 totalVoters 15 jury4 totalVoters 10 jury5 totalVoters 10)
+( jury1 totalVoters 10 jury3 totalVoters 15 jury4 totalVoters 10 jury5 totalVoters 10)
+( jury1 totalVoters 10 jury3 totalVoters 15 jury5 totalVoters 10)
+( jury3 totalVoters 15 jury5 totalVoters 10)
+( jury3 totalVoters 15)
+()
+( jury4 totalVoters 10)
