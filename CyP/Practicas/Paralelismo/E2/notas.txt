@@ -1,0 +1,6 @@
+# COMPILACIÓN:
+  mpicc main.c -o p2
+ 
+# EJECUCIÓN:
+  mpiexec -n <numero_de_procesos> ./p2
+  mpiexec -n 5 ./p2

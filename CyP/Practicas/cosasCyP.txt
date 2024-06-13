@@ -1,0 +1,13 @@
+--Profesor Concurrencia:
+Juan José Quintela
+->Calificaciones:
+P1: 0,48/0,5 (NOTA: ¿?¿?¿?)  
+P2: 0,36/0,75 (NOTA: Funciona correctamente, igual que a muchos compañeros puso una nota para nada acorde a lo entregado)
+P3: 0,47/0,75
+
+--Profesor Paralelismo:
+Alejandro Fernández
+->Calificaciones:
+P1: 0,25/0,25
+P2: 0,50/0,50
+P3: 0,75/0,75

@@ -1,0 +1,13 @@
+-->CALIFICACIÓN
+Script -> 0,5/0,5
+
+-->TERMINAL - Ejecutar una función de la práctica al puerto 5000
+java es.udc.redes.webserver.WebServer 5000
+
+-->TERMINAL - Iniciar un proceso al puerto 5000
+nc localhost 5000
+
+-->NAVEGADOR
+http://localhost:5000/index.html
+
+

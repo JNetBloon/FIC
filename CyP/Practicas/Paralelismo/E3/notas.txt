@@ -1,0 +1,10 @@
+# COMPILACIÓN:
+  mpicc <archivo> -o <nombre ejecutable>
+  mpicc main.c -o p3
+ 
+# EJECUCIÓN:
+  mpiexec -n <numero_de_procesos> ./p3
+  mpiexec -n 5 ./p3
+
+# NOTAS:
+  Resuelto usando la técnica Padding. Se agrega elementos basura a la matriz para que se pueda repartir de forma equitativa la matriz. Se opera con ellos pero no se muestra ni afecta al resultado.

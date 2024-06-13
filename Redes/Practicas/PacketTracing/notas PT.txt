@@ -1,0 +1,9 @@
+clear arp-request
+
+En el router en Static de ROUTING hay que ponerle el siguiente router
+
+
+FSML?
+Bits de host (numero de direcciones) + bits de subredes (Numero de oficinas)
+VSML?
+Calcular la máscara de cada una según las direcciones
