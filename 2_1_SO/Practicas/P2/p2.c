@@ -405,15 +405,13 @@ void pid(char *argumento){
 void authors(char *argumento){
     if(argumento != NULL){ //Si no hay argumento imprime los nombre y el login
         if(strcmp(argumento, "-l")==0){ //Imprimir login
-            printf("j.caneda@udc.es\n");
-            printf("angel.kozlan@udc.es\n");
+            printf("Usuario\n");
         } else if(strcmp(argumento, "-n")==0){ //Imprimir los nombres
-            printf("Jaime Caminha Caneda\n");
-            printf("Angel Berreco Kozlan\n");
+            printf("Correo\n");
         }
     } else {
-        printf("Jaime Caminha Caneda: j.caneda@udc.es\n");
-        printf("Angel Berreco Kozlan: angel.kozlan@udc.es\n");
+        printf("Usuario\n");
+        printf("Correo\n");
     }
 }
 

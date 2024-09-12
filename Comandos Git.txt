@@ -1,30 +1,36 @@
-	cd <DIRECTORIO>
+	cd <DIRECTORIO>						# Moverse a un directorio (".." para ir atrás)
+	ls							# Listar carpetas
 
-	git status					# Estado del repositorio
-	git fetch					# Obtener últimos cambios
-	git merge					# Fusionar cambios en el branch actual
-	git pull					# Combina fetch y merge
+	git config --global user.name				# Ver el nombre de usuario actual			
+	git config --global user.email				# Ver el email actual
+	git config --global user.name "NombreDeUsuario"		# Cambiar el nombre de usuario
+	git config --global user.email "email@gmail.com"	# Cambiar el email
 
-	git add . 					# Manda TODOS (.) los cambios al "staging area"	
-	git commit -m "commit message"			# Crea un commit con los cambios del "staging area" con un mensaje
-	git push origin main				# Envía los commits de la rama local "main" a la origen "origin"
-	git log						# Historial de commits en el repositorio
+	git status						# Estado del repositorio
+	git fetch						# Obtener últimos cambios
+	git merge						# Fusionar cambios en el branch actual
+	git pull						# Combina fetch y merge
+
+	git add . 						# Manda TODOS (.) los cambios al "staging area"	
+	git commit -m "commit message"				# Crea un commit con los cambios del "staging area" con un mensaje
+	git push origin main					# Envía los commits de la rama local "main" a la origen "origin"
+	git log							# Historial de commits en el repositorio
 	
-	git branch 					# Listar ramas locales
-	git branch -a					# Listar ramas remotas
-	git branch -d nombre_de_la_rama			# Eliminar rama local
-	git push origin --delete nombre_de_la_rama	# Eliminar rama remota
-	git branch -m nombre_actual nuevo_nombre	# Renombrar rama local
-	git branch nombre_de_la_rama   	 		# Crea la nueva rama
+	git branch 						# Listar ramas locales
+	git branch -a						# Listar ramas remotas
+	git branch -d nombre_de_la_rama				# Eliminar rama local
+	git push origin --delete nombre_de_la_rama		# Eliminar rama remota
+	git branch -m nombre_actual nuevo_nombre		# Renombrar rama local
+	git branch nombre_de_la_rama   	 			# Crea la nueva rama
 
-	git checkout -b nombre_de_tu_rama		# Crea la nueva rama y se mueve a ella
-	git checkout nombre_de_la_rama  		# Cambia a la nueva rama
-	git merge rama_fuente				# Fusionar cambios a la rama actual
-	git push origin mi_rama				# Enviar al branch especifico
+	git checkout -b nombre_de_tu_rama			# Crea la nueva rama y se mueve a ella
+	git checkout nombre_de_la_rama  			# Cambia a la nueva rama
+	git merge rama_fuente					# Fusionar cambios a la rama actual
+	git push origin mi_rama					# Enviar al branch especifico
 
 
-	git tag -a <tag-name> -m "tag message"		# Crea una etiqueta con un mensaje en el repositorio local
-	git push origin <tag-name>			# Envía la etiqueta al repositorio "origin"
-	git tag -d <tag-name> 				# Se elimina la etiqueta del reposirotio local. Es necesario hacer push para guardar los cambios en remoto
-	git push --delete origin <tag-name>		# Elimina una etiqueta del remoto
+	git tag -a <tag-name> -m "tag message"			# Crea una etiqueta con un mensaje en el repositorio local
+	git push origin <tag-name>				# Envía la etiqueta al repositorio "origin"
+	git tag -d <tag-name> 					# Se elimina la etiqueta del reposirotio local. Es necesario hacer push para guardar los cambios en remoto
+	git push --delete origin <tag-name>			# Elimina una etiqueta del remoto
 	
