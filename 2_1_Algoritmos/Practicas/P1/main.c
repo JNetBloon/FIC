@@ -1,6 +1,3 @@
-//Camiña Caneda, Jaime	//	j.caneda@udc.es
-//Berreco Kozlan, Ángel	//	angel.kozlan@udc.es
-
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>

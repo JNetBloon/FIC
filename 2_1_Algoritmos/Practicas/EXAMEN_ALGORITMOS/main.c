@@ -1,4 +1,3 @@
-//Camiña Caneda, Jaime	//	j.caneda@udc.es
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
